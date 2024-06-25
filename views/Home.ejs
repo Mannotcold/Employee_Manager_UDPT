@@ -1,15 +1,596 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <title>Product</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Man's blog</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="/images/blog-1" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="/stylesheets/stylehome.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 </head>
 
-<body>
-  <div>
-    <img src="/images/pngtree-file-icon-design-vector-png-image_5506121.png">
+<body class="light-theme">
+
+  <!--
+    - #HEADER
+  -->
+
+  <header>
+
+    <div class="container">
+
+      <nav class="navbar">
+
+
+        <div class="flex-wrapper">
+
+          <ul class="desktop-nav">
+
+            <li>
+              <a href="#home" class="nav-link">Home</a>
+            </li>
+
+            <li>
+              <a href="#blog" class="nav-link">Blog</a>
+            </li>
+
+            <li>
+              <a href="#home" class="nav-link">About Me</a>
+            </li>
+
+            <li>
+              <a href="#certificate" class="nav-link">Certificate</a>
+            </li>
+
+            <li>
+              <a href="#languages" class="nav-link">Languages and Techniques</a>
+            </li>
+
+
+            <li>
+              <a href="#contact" class="nav-link">Contact</a>
+            </li>
+
+          </ul>
+
+          <button class="theme-btn theme-btn-desktop light">
+            <ion-icon name="moon" class="moon"></ion-icon>
+            <ion-icon name="sunny" class="sun"></ion-icon>
+          </button>
+        </div>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+
+
+
+  <main>
+
+    <!--
+      - #HERO SECTION
+    -->
+
+    <div id="home" class="hero">
+
+      <div class="container">
+
+        <div class="left">
+
+          <h1 class="h1">
+            Hi, I'm <b>Nguyen Hoai Man</b>.
+            <br>Back-end Developer
+          </h1>
+          <h3 class="h3">I am Man, a Four-year student at University of Science - VNU. I am studying at the Faculty of
+            Information Technology in Ho Chi Minh City. My major is Information Systems and Software Technology</h3>
+          <div class="btn-group">
+            <a href="#" class="btn btn-primary">Contact Me</a>
+            <a href="#" class="btn btn-secondary">About Me</a>
+          </div>
+
+        </div>
+
+        <div class="right">
+
+          <div class="pattern-bg"></div>
+          <div class="img-box">
+            <img src="/images/hero.png" alt="Julia Walker" class="hero-img">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    </div>
+
+
+    <div class="main">
+
+      <div class="container">
+
+
+        <!--
+          - BLOG SECTION
+        -->
+
+        <div id="blog" class="blog">
+
+          <h2 class="h2">Latest Blog Post</h2>
+
+          <div class="blog-card-group">
+
+
+            <div class="blog-card">
+
+              <div class="blog-card-banner">
+                <img src="/images/blog-1.png" alt="BI_GlobalSuperstore" width="250" class="blog-banner-img">
+              </div>
+
+              <div class="blog-content-wrapper">
+
+                <button class="blog-topic text-tiny">ETL</button>
+                <button class="blog-topic text-tiny">python</button>
+                <button class="blog-topic text-tiny">OLAP</button>
+                <button class="blog-topic text-tiny">mining</button>
+                <h3>
+                  <a href="#" class="h3">
+                    BI_GlobalSuperstore
+                  </a>
+                </h3>
+
+                <p class="blog-text">
+                  Deploy ETL process to extract data from multiple sources, transform, clean data, load data into
+                  database using
+                  SSIS tool
+                  Build multidimensional data using SSAS tool and explain the choice of appropriate OLAP operations for
+                  a number of
+                  analysis requirements.
+                  Use some powerBI data representation tools to present analysis and exploitation results (report,
+                  dashboard...)
+                  Use SSAS and apply integrated mining techniques to perform data mining from the built database. <br>
+                </p>
+
+                <div class="wrapper-flex">
+
+                  <div class="profile-wrapper">
+                    <img src="/images/author.png" alt="Nguyen Hoai Man" width="50">
+                  </div>
+
+                  <div class="wrapper">
+                    <a href="#" class="h4">Nguyen Hoai Man</a>
+
+                    <p class="text-sm">
+                      <time datetime="2-2024">2-2024</time>
+                      <span class="separator"></span>
+                      <span class="icon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                      <time datetime="PT3M">4 month</time>
+                    </p>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+
+            <div class="blog-card">
+
+              <div class="blog-card-banner">
+                <img src="/images/blog-2.png" alt="Employee management system" width="250"
+                  class="blog-banner-img">
+              </div>
+
+              <div class="blog-content-wrapper">
+
+                <button class="blog-topic text-tiny">C# winform</button>
+                <button class="blog-topic text-tiny">Oracle</button>
+
+                <h3>
+                  <a href="#" class="h3">
+                    Employee management system
+                  </a>
+                </h3>
+
+                <p class="blog-text">
+                  An employee app to help them perform their tasks and provide management capabilities for
+                  supervisors <br>
+                </p>
+
+                <div class="wrapper-flex">
+
+                  <div class="profile-wrapper">
+                    <img src="/images/author.png" alt="Nguyen Hoai Man" width="50">
+                  </div>
+
+                  <div class="wrapper">
+                    <a href="#" class="h4">Nguyen Hoai Man</a>
+
+                    <p class="text-sm">
+                      <time datetime="3-2023">3-2023</time>
+                      <span class="separator"></span>
+                      <span class="icon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                      <time datetime="PT3M">12 month</time>
+                    </p>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="blog-card">
+
+              <div class="blog-card-banner">
+                <img src="/images/blog-3.png" alt="Sale course web application" width="250"
+                  class="blog-banner-img">
+              </div>
+
+              <div class="blog-content-wrapper">
+
+                <button class="blog-topic text-tiny">React.Js</button>
+                <button class="blog-topic text-tiny">Boostrap</button>
+                <button class="blog-topic text-tiny">Javascript</button>
+                <button class="blog-topic text-tiny">MongoDB</button>
+                <h3>
+                  <a href="#" class="h3">
+                    Sale course web application
+                  </a>
+                </h3>
+
+                <p class="blog-text">
+                  A website for parents that they can register the courses for their children <br>
+                </p>
+
+                <div class="wrapper-flex">
+
+                  <div class="profile-wrapper">
+                    <img src="/images/author.png" alt="Nguyen Hoai Man" width="50">
+                  </div>
+
+                  <div class="wrapper">
+                    <a href="#" class="h4">Nguyen Hoai Man</a>
+
+                    <p class="text-sm">
+                      <time datetime="1-2023">1-2023</time>
+                      <span class="separator"></span>
+                      <span class="icon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                      <time datetime="PT3M">15 month</time>
+                    </p>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="blog-card">
+
+              <div class="blog-card-banner">
+                <img src="/images/blog-4.png"
+                  alt="Automatic water spray system controlled by temperature sensor." width="250"
+                  class="blog-banner-img">
+              </div>
+
+              <div class="blog-content-wrapper">
+
+                <button class="blog-topic text-tiny">IoT</button>
+                <button class="blog-topic text-tiny">NodeRED</button>
+
+                <h3>
+                  <a href="#" class="h3">
+                    Automatic water spray system controlled by temperature sensor.
+                  </a>
+                </h3>
+
+                <p class="blog-text">
+                  Temperature sensors are installed indoors with the ability to automatically measure and calculate
+                  temperature
+                  Calculate and perform automatic water spraying according to the maximum or dark temperature level
+                  previously installed. When the temperature increases beyond what the user needs
+                  set, the device will turn on the cooling pump or when the temperature is below the specified level
+                  then turn off the pump. This control can be done via
+                  buttons on devices or websites. <br>
+                </p>
+
+                <div class="wrapper-flex">
+
+                  <div class="profile-wrapper">
+                    <img src="/images/author.png" alt="Nguyen Hoai Man" width="50">
+                  </div>
+
+                  <div class="wrapper">
+                    <a href="#" class="h4">Nguyen Hoai Man</a>
+
+                    <p class="text-sm">
+                      <time datetime="1-2023">1-2023</time>
+                      <span class="separator"></span>
+                      <span class="icon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                      <time datetime="PT3M">15 month</time>
+                    </p>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+            <div class="blog-card">
+
+              <div class="blog-card-banner">
+                <img src="/images/blog-5.png" alt="Review Places in Viet Nam" width="250"
+                  class="blog-banner-img">
+              </div>
+
+              <div class="blog-content-wrapper">
+
+                <button class="blog-topic text-tiny">C# winform</button>
+                <button class="blog-topic text-tiny">TCP protocol</button>
+
+                <h3>
+                  <a href="#" class="h3">
+                    Manage digital contacts
+                  </a>
+                </h3>
+
+                <p class="blog-text">
+                  Using TCP protocol to connect and create server to manage member information<br>
+                </p>
+
+                <div class="wrapper-flex">
+
+                  <div class="profile-wrapper">
+                    <img src="/images/author.png" alt="Nguyen Hoai Man" width="50">
+                  </div>
+
+                  <div class="wrapper">
+                    <a href="#" class="h4">Nguyen Hoai Man</a>
+
+                    <p class="text-sm">
+                      <time datetime="8-2023">8-2022</time>
+                      <span class="separator"></span>
+                      <span class="icon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+                      <time datetime="PT3M">19 month</time>
+                    </p>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+
+
+          </div>
+
+          <button class="btn load-more">Load More</button>
+
+        </div>
+
+        <!--
+          - ASIDE
+        -->
+
+        <div class="aside">
+
+
+          <div id="education" class="education">
+
+            <h2 class="h2">Education</h2>
+
+            <a href="#" class="education-btn">
+              <div class="icon-box">
+                <span class="icon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
+              </div>
+
+              <p>University of Science</p>
+            </a>
+
+            <a href="#" class="education-btn">
+              <div class="icon-box">
+                <span class="icon"><i class="fa fa-database" aria-hidden="true"></i></span>
+              </div>
+
+              <p>Information System</p>
+            </a>
+
+          </div>
+
+          <div id="certificate" class="certificate">
+
+            <h2 class="h2">Certificate</h2>
+
+            <a href="#" class="certificate-btn">
+              <div class="icon-box">
+                <span class="icon"><i class="fa fa-certificate" aria-hidden="true"></i></span>
+              </div>
+
+              <p>Kodu Game Lab <br>
+                Certificate from <br>American Center HCMC</p>
+            </a>
+
+            <a href="#" class="certificate-btn">
+              <div class="icon-box">
+                <span class="icon"><i class="fa fa-trophy" aria-hidden="true"></i></span>
+              </div>
+
+              <p>Lego SPIKE PRIME <br>
+                Certificate from <br>American Center HCMC</p>
+            </a>
+          </div>
+
+          <div id="languages" class="tags">
+
+            <h2 class="h2">Languages and Techniques </h2>
+            <div class="wrapper">
+              <button class="hashtag">#html</button>
+              <button class="hashtag">#css</button>
+              <button class="hashtag">#javascript</button>
+              <button class="hashtag">#C#</button>
+              <button class="hashtag">#C++</button>
+              <button class="hashtag">#nodejs</button>
+              <button class="hashtag">#mongodb</button>
+              <button class="hashtag">#SQL server</button>
+              <button class="hashtag">#redis</button>
+              <button class="hashtag">#GitHub</button>
+              <button class="hashtag">#Docker</button>
+              <button class="hashtag">#Design UI with Figma and Canva</button>
+            </div>
+
+          </div>
+
+          <div id="contact" class="contact">
+
+            <h2 class="h2">Contact me at</h2>
+
+            <div class="wrapper">
+              <p>Phone: <br> <span>0964490161</span></p>
+              <p>Email: <br><span>man2082002@gmail.com</span></p>
+              <p>Location: <br> <span>Go Vap, Ho Chi Minh city</span></p>
+              <ul class="social-link">
+
+                <li>
+                  <a href="https://www.facebook.com/hoaiman208" class="icon-box facebook" target="_blank">
+                    <span class="icon"><i class="fa fa-facebook" aria-hidden="true"></i></span>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="https://www.linkedin.com/in/nguyenhoaiman/" class="icon-box linkedin" target="_blank">
+                    <span class="icon"><i class="fa fa-linkedin" aria-hidden="true"></i></span>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="https://github.com/Mannotcold" class="icon-box github" target="_blank">
+                    <span class="icon"><i class="fa fa-github" aria-hidden="true"></i></span>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="https://www.facebook.com/hoaiman208" class="icon-box cv" target="_blank">
+                    <span>cv</span>
+                  </a>
+                </li>
+
+              </ul>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <div class="map-section">
+    <img src="/assets/images/map.png" alt="Map">
   </div>
+
+
+
+  <!--
+    - #FOOTER
+  -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="wrapper">
+
+        <p class="footer-text">
+          <span>Jim Rohn: </span>
+          "If you are not willing to risk the unusual, you will have to settle for the ordinary."
+        </p>
+
+      </div>
+
+      <div class="wrapper">
+
+        <p class="footer-title">Quick Links</p>
+
+        <ul>
+
+          <li>
+            <a href="#" class="footer-link">About Us</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Contact Us</a>
+          </li>
+
+        </ul>
+
+      </div>
+
+      <div class="wrapper">
+
+        <p class="footer-title">Interest</p>
+
+        <ul>
+
+          <li>
+            <a href="#" class="footer-link">Coding</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Trading</a>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <p class="copyright">
+      &copy; Copyright 2024 <a href="#">NHM</a>
+    </p>
+
+  </footer>
+
 </body>
 
 </html>
