@@ -190,7 +190,7 @@ html {
   margin-inline: auto;
   margin: auto;
   /* fallback for margin-inline */
-  padding: 0 15px;
+  padding: 0 20px;
 }
 
 .btn {
@@ -344,16 +344,71 @@ header .button1:hover {
 }
 
 
+
+
 /*-----------------------------------*\ 
   #introduce SECTION
 \*-----------------------------------*/
 .column {
-  flex: 1;
-    padding: 20px !important;
-    box-sizing: border-box;
-  background-color: #0fa4ee;
+  background-color: rgb(254, 254, 254);
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  gap: 60px;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.column {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.column2 {
+  display: grid;
+  grid-template-columns: 5fr 5fr 5fr;
+  gap: 60px;
+  
+}
+
+.column2 {
+  
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+
+.column3 {
+  padding: 20px;
+  background-color: rgb(254, 254, 254);
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+}
+
+.column3 img.icon {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 0px;
+  margin-left: 80px;
+  text-align: center;
+  position: relative;
+}
+
+.column3 h3 {
+  text-align: center;
+  margin: 10px 10px;
+  color: #333;
+}
+
+.column3 p {
+  color: #666;
+  text-align: center;
+}
 
 /*-----------------------------------*\ 
   #FOOTER
@@ -519,16 +574,6 @@ footer .wrapper {
 }
 
 
-
-/**
-   * MAIN 
-   */
-
-.main .container {
-  display: grid;
-  grid-template-columns: 5fr 2fr;
-  gap: 60px;
-}
 
 
 /* Map section */
