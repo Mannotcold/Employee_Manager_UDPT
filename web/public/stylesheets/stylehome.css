@@ -367,14 +367,14 @@ header .button1:hover {
 .column2 {
   display: grid;
   grid-template-columns: 5fr 5fr 5fr;
-  gap: 60px;
+  gap: 30px;
   
 }
 
 .column2 {
   
   flex: 1;
-  padding: 20px;
+  padding: 30px;
   box-sizing: border-box;
 }
 
@@ -393,8 +393,7 @@ header .button1:hover {
 .column3 img.icon {
   width: 50px;
   height: 50px;
-  margin-bottom: 0px;
-  margin-left: 80px;
+  margin: 10px 120px;
   text-align: center;
   position: relative;
 }
@@ -593,4 +592,9 @@ footer .wrapper {
 
 .footer-link {
   margin-bottom: 0.3rem;
+}
+
+.icon-box {
+  color: #0fa4ee;
+  margin: 5px 25px;
 }
