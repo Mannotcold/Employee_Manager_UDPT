@@ -9,6 +9,7 @@ const configViewEngine = require('./config/viewEngine')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var HomeRouter = require('./routes/Home');
+var LoginRouter = require('./routes/Login');
 var app = express();
 
 
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', HomeRouter);
+app.use('/Login', LoginRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
