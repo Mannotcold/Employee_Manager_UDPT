@@ -3,9 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const mysql = require('mysql2');
-
+// require('dotenv').config();
 const configViewEngine = require('./config/viewEngine')
+const connection = require('./config/database')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -44,15 +44,8 @@ app.use(function (err, req, res, next) {
 
 
 
-// test database
-// Create the connection to database
-const connection = mysql.createConnection({
-  host: 'localhost',
-  port: 3307,
-  user: 'root',
-  password: '123456',
-  database: 'UDPT',
-});
+
+
 
 // A simple SELECT query
 connection.query(
@@ -62,7 +55,5 @@ connection.query(
     console.log("fields:", fields); // fields contains extra meta data about results, if available
   }
 );
-
-
 
 module.exports = app;
