@@ -1,10 +1,8 @@
 var express = require('express');
-const { getLoginpage, getProductpage } = require('../Controller/homeController')
+const { getLoginpage } = require('../Controller/homeController')
 var router = express.Router();
 
-/* GET login page. */
+// /* GET login page. */
 router.get('/', getLoginpage);
-router.get('/ty', getProductpage);
+// router.get('/register', getRegisterpage);
 module.exports = router;
-
-``

@@ -3,14 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-// require('dotenv').config();
+require('dotenv').config();
 const configViewEngine = require('./config/viewEngine')
 const connection = require('./config/database')
 
+
+const port = 3000;
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var HomeRouter = require('./routes/Home');
 var LoginRouter = require('./routes/Login');
+var RegisterRouter = require('./routes/register');
 var app = express();
 
 
@@ -24,6 +27,7 @@ app.use(cookieParser());
 
 app.use('/', HomeRouter);
 app.use('/Login', LoginRouter);
+app.use('/Register', RegisterRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
@@ -44,9 +48,6 @@ app.use(function (err, req, res, next) {
 
 
 
-
-
-
 // A simple SELECT query
 connection.query(
   'SELECT * FROM Users',
@@ -56,4 +57,11 @@ connection.query(
   }
 );
 
+
+
+
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
 module.exports = app;
+
