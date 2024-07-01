@@ -1,7 +1,9 @@
 var express = require('express');
-const {getRegisterpage } = require('../Controller/homeController')
+const { getRegisterpage, postRegisterpage } = require('../Controller/homeController')
 var router = express.Router();
 
-// /* GET login page. */
+// /* GET register page. */
 router.get('/', getRegisterpage);
+router.post('/Create_user', postRegisterpage);
+// router.post('/Register/Create_user', getRegisterpage);
 module.exports = router;

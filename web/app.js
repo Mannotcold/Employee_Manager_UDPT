@@ -16,6 +16,9 @@ var LoginRouter = require('./routes/Login');
 var RegisterRouter = require('./routes/register');
 var app = express();
 
+//config req.body
+app.use(express.json()) // for Json
+app.use(express.urlencoded({extended: true })) // for form data
 
 // view engine setup
 configViewEngine(app);
@@ -49,13 +52,13 @@ app.use(function (err, req, res, next) {
 
 
 // A simple SELECT query
-connection.query(
-  'SELECT * FROM Users',
-  function (err, results, fields) {
-    console.log("resurlts:", results); // results contains rows returned by server
-    console.log("fields:", fields); // fields contains extra meta data about results, if available
-  }
-);
+// connection.query(
+//   'SELECT * FROM Users',
+//   function (err, results, fields) {
+//     console.log("resurlts:", results); // results contains rows returned by server
+//     console.log("fields:", fields); // fields contains extra meta data about results, if available
+//   }
+// );
 
 
 

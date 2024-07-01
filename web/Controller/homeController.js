@@ -14,6 +14,13 @@ const getRegisterpage = function (req, res, next) {
     // res.send('sâsffsa');
 }
 
+const postRegisterpage = function (req, res, next) {
+    console.log(">>>req.body: ", req.body)
+    res.render('register.ejs');
+    // res.send('sâsffsa');
+}
+
+
 let user = [];
 const getProductpage = (req, res) => {
     connection.query(
@@ -31,5 +38,6 @@ const getProductpage = (req, res) => {
 }
 
 module.exports = {
-    getHomepage, getProductpage, getLoginpage, getRegisterpage
+    getHomepage, getProductpage, getLoginpage, getRegisterpage,
+    postRegisterpage
 }
