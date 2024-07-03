@@ -15,8 +15,24 @@ const getRegisterpage = function (req, res, next) {
 }
 
 const postRegisterpage = function (req, res, next) {
-    console.log(">>>req.body: ", req.body)
-    res.render('register.ejs');
+    
+    // let username = req.body.username;
+    // let password = req.body.password;
+    // let type = req.body.type;
+
+    let { username, password, type } = req.body;
+
+    // with placeholder
+    connection.query(
+        `INSERT INTO Users (taikhoan, matkhau, loaiTK) VALUES (?, ?, ?)`,
+        [username, password, type],
+        function (err, results) {
+            console.log(results);
+            res.send('thanh cong');
+        }
+    );
+    console.log(">>>req.body: ", username, password, type);
+    
     // res.send('sâsffsa');
 }
 
