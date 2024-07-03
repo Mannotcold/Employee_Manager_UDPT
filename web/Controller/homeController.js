@@ -37,6 +37,7 @@ const postRegisterpage = function (req, res, next) {
 }
 
 
+
 let user = [];
 const getProductpage = (req, res) => {
     connection.query(
