@@ -9,22 +9,68 @@
         integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/stylesheets/stylelogin.css">
+
+
+    <!-- google font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+
 </head>
 
-<body>
-    <form action="/register/Create_user" method="post">
+<body class="light-theme">
+    <header>
+
+        <div class="container">
+
+            <nav class="navbar">
+
+
+                <div class="flex-wrapper">
+
+                    <ul class="desktop-nav">
+
+                        <li>
+                            <a href="/adminhome" class="nav-link">Home</a>
+                        </li>
+
+                        <li>
+                            <a href="/adminhome/Register" class="nav-link">Create User</a>
+                        </li>
+
+                        <li>
+                            <a href="#home" class="nav-link">About</a>
+                        </li>
+
+                        <li>
+                            <a href="#contact" class="nav-link">Contact</a>
+                        </li>
+
+                    </ul>
+
+                    <a href="/Login" class="button1">
+                        <h1>Login</h1>
+                    </a>
+                </div>
+
+            </nav>
+
+        </div>
+
+    </header>
+    <main><form action="/adminhome/register/Create_user" method="post">
         <div class="form-wrapper">
-
+    
             <img src="/images/Author.jpg" alt="Descriptive image text" class="form-image">
-
+    
             <div class="form-container">
-
+    
                 <h2>Register</h2>
                 <div class="form-group">
-
+    
                     <label for="name">LoginName:</label>
-                    <input type="text" id="name" name="username" placeholder="Enter your name" required
-                        autocomplete="off">
+                    <input type="text" id="name" name="username" placeholder="Enter your name" required autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="password">password:</label>
@@ -36,13 +82,13 @@
                 </div>
                 <button type="submit" class="submit-btn">Register</button>
 
-                <p>Don't have an account? <a class="link" href="/signup">SignUp</a></p>
             </div>
             <a href="/" class="icon-box">
                 <span class="icon_close"><i class="fa fa-times close-btn" aria-hidden="true"></i></span>
             </a>
         </div>
-    </form>
+    </form></main>
+    
 
 
 </body>

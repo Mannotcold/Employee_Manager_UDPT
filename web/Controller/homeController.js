@@ -8,6 +8,11 @@ const getLoginpage = function (req, res, next) {
     res.render('Login.ejs');
 }
 
+const getAdminpage = function (req, res, next) {
+    res.render('admin.ejs');
+    // res.send('sâsffsa');
+}
+
 
 const getRegisterpage = function (req, res, next) {
     res.render('register.ejs');
@@ -56,5 +61,5 @@ const getProductpage = (req, res) => {
 
 module.exports = {
     getHomepage, getProductpage, getLoginpage, getRegisterpage,
-    postRegisterpage
+    postRegisterpage, getAdminpage
 }

@@ -13,7 +13,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var HomeRouter = require('./routes/Home');
 var LoginRouter = require('./routes/Login');
-var RegisterRouter = require('./routes/register');
+// var RegisterRouter = require('./routes/AdminHome');
+var AdminHomeRouter = require('./routes/AdminHome');
 var app = express();
 
 //config req.body
@@ -30,7 +31,8 @@ app.use(cookieParser());
 
 app.use('/', HomeRouter);
 app.use('/Login', LoginRouter);
-app.use('/Register', RegisterRouter);
+// app.use('/Register', RegisterRouter);
+app.use('/AdminHome', AdminHomeRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
