@@ -16,6 +16,8 @@ const getAdminpage = async function (req, res, next) {
 }
 
 const getedituserpage = async function (req, res, next) {
+    const userId = req.params.id
+    console.log(">>>req.body: ", req.params, userId);
     res.render('edituser.ejs');
 
 }

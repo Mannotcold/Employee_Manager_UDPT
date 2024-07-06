@@ -6,6 +6,6 @@ var router = express.Router();
 router.get('/', getAdminpage);
 router.get('/Register', getRegisterpage);
 router.post('/Register/Create_user', postRegisterpage);
-router.get('/edit_user', getedituserpage);
+router.get('/edit_user/:id', getedituserpage);
 // router.post('/Register/Create_user', getRegisterpage);
 module.exports = router;
