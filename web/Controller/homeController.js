@@ -1,5 +1,5 @@
 const connection = require('../config/database')
-const { getAllUsers, getUserbyID, updateUserbyID } = require('../services/CRUDServives')
+const { getAllUsers, getUserbyID, updateUserbyID, DeleteUserbyID } = require('../services/CRUDServives')
 const getHomepage = function (req, res, next) {
     res.render('Home.ejs');
 }
@@ -33,6 +33,16 @@ const postUpdatepage = async function (req, res, next) {
     // console.log(">>>req.body: ", results);
     let updateuser = await updateUserbyID(username, password, type, userID);
     res.redirect(`/`)
+}
+
+const postDeletepage = async function (req, res, next) {
+    // let userID = req.body.userID;
+    let userID = req.params;
+    // const id = userID;
+    // const [results, fields] = await connection.query(`UPDATE Users SET taikhoan = ? , matkhau = ?, loaiTK = ? WHERE id = ?`, [username, password, type, userID]);
+    // console.log(">>>req.body: ", results);
+    let updateuser = await DeleteUserbyID(userID);
+    res.redirect(`/adminhome`)
 }
 
 
@@ -94,5 +104,5 @@ const getProductpage = (req, res) => {
 
 module.exports = {
     getHomepage, getProductpage, getLoginpage, getRegisterpage,
-    postRegisterpage, getAdminpage, getedituserpage, postUpdatepage
+    postRegisterpage, getAdminpage, getedituserpage, postUpdatepage, postDeletepage
 }

@@ -20,104 +20,130 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- <script>$(document).ready(function () {
+            $(".btnDelete").click(function () {
+                const id = $(this).attr('data-id');
+                if (confirm(`Are you sure to delete this tutorial, id = $(id)`)) {
+                    $.ajax({
+                        url: `${window.location.origin}/api/tutorials/${id}`,
+                        method: "DELETE",
+                        success: (result) => {
+                            console.log(result);
+                            $(this).closest("tr").remove();
+                        },
+                        error: function (error) {
+                            console.log(">>> ajax error:", error)
+                        }
+                    });
+                } else {
+                    // Do nothing!
+                }
+            });
+        });</script> -->
 </head>
 
 <body class="light-theme">
 
-    <!--
-    - #HEADER
-  -->
+    <!- - #HEADER ->
 
 
-    <header>
+        <header>
 
-        <div class="container">
+            <div class="container">
 
-            <nav class="navbar">
+                <nav class="navbar">
 
 
-                <div class="flex-wrapper">
+                    <div class="flex-wrapper">
 
-                    <ul class="desktop-nav">
+                        <ul class="desktop-nav">
 
-                        <li>
-                            <a href="/adminhome" class="nav-link">Home</a>
-                        </li>
+                            <li>
+                                <a href="/adminhome" class="nav-link">Home</a>
+                            </li>
 
-                        <li>
-                            <a href="/adminhome/Register" class="nav-link">Create User</a>
-                        </li>
+                            <li>
+                                <a href="/adminhome/Register" class="nav-link">Create User</a>
+                            </li>
 
-                        <li>
-                            <a href="#home" class="nav-link">About</a>
-                        </li>
+                            <li>
+                                <a href="#home" class="nav-link">About</a>
+                            </li>
 
-                        <li>
-                            <a href="#contact" class="nav-link">Contact</a>
-                        </li>
+                            <li>
+                                <a href="#contact" class="nav-link">Contact</a>
+                            </li>
 
-                    </ul>
+                        </ul>
 
-                    <a href="/Login" class="button1">
-                        <h1>Login</h1>
-                    </a>
-                </div>
+                        <a href="/Login" class="button1">
+                            <h1>Login</h1>
+                        </a>
+                    </div>
 
-            </nav>
+                </nav>
 
-        </div>
-
-    </header>
-
-    <main>
-
-        <div>
-            <div class="table-wrapper">
-                
-                <div class="title">
-                    <h1>List User</h1>
-                </div>
-                <table class="fl-table">
-
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Tài khoản</th>
-                            <th>Mật khẩu</th>
-                            <th>Loại tài khoản</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-
-                        <% for (let i=0; i < listusers.length; i++) { %>
-                            <tr>
-                                <td><%= listusers[i].id %></td>
-                                <td><%= listusers[i].taikhoan %></td>
-                                <td><%= listusers[i].matkhau %></td>
-                                <td><%= listusers[i].loaiTK %></td>
-                                <td>
-                                    <a href="/AdminHome/edit_user/<%= listusers[i].id %>" class="button1">
-                                        <button>Edit</button>
-                                    </a>
-                                    <a href="" class="button1">
-                                        <button>Delete</button>
-                                    </a>
-                                    
-                                </td>
-                            </tr>
-                        <% } %>
-                        
-                    <tbody>
-                </table>
             </div>
-        </div>
+
+        </header>
+
+        <main>
+
+            <div>
+                <div class="table-wrapper">
+
+                    <div class="title">
+                        <h1>List User</h1>
+                    </div>
+                    <table class="fl-table">
+
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tài khoản</th>
+                                <th>Mật khẩu</th>
+                                <th>Loại tài khoản</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <% for (let i=0; i < listusers.length; i++) { %>
+                                <tr>
+                                    <td>
+                                        <%= listusers[i].id %>
+                                    </td>
+                                    <td>
+                                        <%= listusers[i].taikhoan %>
+                                    </td>
+                                    <td>
+                                        <%= listusers[i].matkhau %>
+                                    </td>
+                                    <td>
+                                        <%= listusers[i].loaiTK %>
+                                    </td>
+                                    <td>
+                                        <a href="/AdminHome/edit_user/<%= listusers[i].id %>" class="button1">
+                                            <button>Edit</button>
+                                        </a>
+                                        <form action="/AdminHome/delete_user/<%= listusers[i].id %>" method="post">
+                                            <button>Delete</button></form>
+
+                                    </td>
+                                </tr>
+                                <% } %>
+
+                        <tbody>
+                    </table>
+                </div>
+            </div>
 
 
 
 
-    </main>
+        </main>
 
 </body>
 
