@@ -1,5 +1,5 @@
 const connection = require('../config/database')
-const { getAllUsers, getUserbyID } = require('../services/CRUDServives')
+const { getAllUsers, getUserbyID, updateUserbyID } = require('../services/CRUDServives')
 const getHomepage = function (req, res, next) {
     res.render('Home.ejs');
 }
@@ -18,7 +18,21 @@ const getAdminpage = async function (req, res, next) {
 const getedituserpage = async function (req, res, next) {
     const userId = req.params.id
     let user = await getUserbyID(userId);
-    res.render('edituser.ejs', { userEdit : user });
+    res.render('edituser.ejs', { userEdit: user });
+}
+
+const postUpdatepage = async function (req, res, next) {
+    let userID = req.body.userID;
+    let username = req.body.username;
+    let password = req.body.password;
+    let type = req.body.type;
+
+    // console.log(">>>req.body: ", username, password, type);
+
+    // const [results, fields] = await connection.query(`UPDATE Users SET taikhoan = ? , matkhau = ?, loaiTK = ? WHERE id = ?`, [username, password, type, userID]);
+    // console.log(">>>req.body: ", results);
+    let updateuser = await updateUserbyID(username, password, type, userID);
+    res.redirect(`/`)
 }
 
 
@@ -80,5 +94,5 @@ const getProductpage = (req, res) => {
 
 module.exports = {
     getHomepage, getProductpage, getLoginpage, getRegisterpage,
-    postRegisterpage, getAdminpage, getedituserpage
+    postRegisterpage, getAdminpage, getedituserpage, postUpdatepage
 }

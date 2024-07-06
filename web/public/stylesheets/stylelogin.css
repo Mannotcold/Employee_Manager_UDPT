@@ -370,3 +370,7 @@ h2 {
 p {
   margin-top: 15px;
 }
+
+.d-none {
+  display: none;
+}
