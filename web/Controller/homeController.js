@@ -1,5 +1,5 @@
 const connection = require('../config/database')
-
+const { getAllUsers } = require('../services/CRUDServives')
 const getHomepage = function (req, res, next) {
     res.render('Home.ejs');
 }
@@ -8,9 +8,16 @@ const getLoginpage = function (req, res, next) {
     res.render('Login.ejs');
 }
 
-const getAdminpage = function (req, res, next) {
-    res.render('admin.ejs');
-    // res.send('sâsffsa');
+const getAdminpage = async function (req, res, next) {
+    let results = await getAllUsers();
+    console.log(">>>req.body: ", results);
+    res.render('admin.ejs', { listusers: results });
+
+}
+
+const getedituserpage = async function (req, res, next) {
+    res.render('edituser.ejs');
+
 }
 
 
@@ -19,25 +26,36 @@ const getRegisterpage = function (req, res, next) {
     // res.send('sâsffsa');
 }
 
-const postRegisterpage = function (req, res, next) {
-    
-    // let username = req.body.username;
-    // let password = req.body.password;
-    // let type = req.body.type;
+const postRegisterpage = async function (req, res, next) {
 
-    let { username, password, type } = req.body;
+    let username = req.body.username;
+    let password = req.body.password;
+    let type = req.body.type;
+
+    // let [username, password, type ]  = req.body;
 
     // with placeholder
-    connection.query(
-        `INSERT INTO Users (taikhoan, matkhau, loaiTK) VALUES (?, ?, ?)`,
-        [username, password, type],
-        function (err, results) {
-            console.log(results);
-            res.send('thanh cong');
-        }
+    // connection.query(
+    //     `INSERT INTO Users (taikhoan, matkhau, loaiTK) VALUES (?, ?, ?)`,
+    //     [username, password, type],
+    //     function (err, results) {
+    //         console.log(results);
+    //         res.send('thanh cong');
+    //     }
+    // );
+    // const [results, fields] = connection.query(
+    //     `INSERT INTO Users (taikhoan, matkhau, loaiTK) VALUES (?, ?, ?)`,
+    //     [username, password, type]
+    // );
+
+    // console.log(">>>req.body: ", username, password, type);
+
+    const [results, fields] = await connection.query(
+        'INSERT INTO Users (taikhoan, matkhau, loaiTK) VALUES (?, ?, ?)',
+        [username, password, type]
     );
-    console.log(">>>req.body: ", username, password, type);
-    
+    console.log(">>>req.body: ", results);
+    res.send('thanh cong');
     // res.send('sâsffsa');
 }
 
@@ -61,5 +79,5 @@ const getProductpage = (req, res) => {
 
 module.exports = {
     getHomepage, getProductpage, getLoginpage, getRegisterpage,
-    postRegisterpage, getAdminpage
+    postRegisterpage, getAdminpage, getedituserpage
 }

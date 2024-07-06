@@ -2,165 +2,122 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Man's blog</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
 
-  <!--
-    - favicon
-  -->
-  <link rel="shortcut icon" href="/images/blog-1" type="image/x-icon">
-
-  <!--
+    <!--
     - custom css link
   -->
-  <link rel="stylesheet" href="/stylesheets/stylehome.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
-    integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!--
+    <link rel="stylesheet" href="/stylesheets/styleadminhome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+        integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--
     - google font link
   -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 </head>
 
 <body class="light-theme">
 
-  <!--
+    <!--
     - #HEADER
   -->
 
 
-  <header>
+    <header>
 
-    <div class="container">
+        <div class="container">
 
-      <nav class="navbar">
+            <nav class="navbar">
 
 
-        <div class="flex-wrapper">
+                <div class="flex-wrapper">
 
-          <ul class="desktop-nav">
+                    <ul class="desktop-nav">
 
-            <li>
-              <a href="/adminhome" class="nav-link">Home</a>
-            </li>
+                        <li>
+                            <a href="/adminhome" class="nav-link">Home</a>
+                        </li>
 
-            <li>
-              <a href="/adminhome/Register" class="nav-link">Create User</a>
-            </li>
+                        <li>
+                            <a href="/adminhome/Register" class="nav-link">Create User</a>
+                        </li>
 
-            <li>
-              <a href="#home" class="nav-link">About</a>
-            </li>
+                        <li>
+                            <a href="#home" class="nav-link">About</a>
+                        </li>
 
-            <li>
-              <a href="#contact" class="nav-link">Contact</a>
-            </li>
+                        <li>
+                            <a href="#contact" class="nav-link">Contact</a>
+                        </li>
 
-          </ul>
+                    </ul>
 
-          <a href="/Login" class="button1">
-            <h1>Login</h1>
-          </a>
+                    <a href="/Login" class="button1">
+                        <h1>Login</h1>
+                    </a>
+                </div>
+
+            </nav>
+
         </div>
 
-      </nav>
+    </header>
 
-    </div>
+    <main>
 
-  </header>
+        <div>
+            <div class="table-wrapper">
+                
+                <div class="title">
+                    <h1>List User</h1>
+                </div>
+                <table class="fl-table">
 
-  <main>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tài khoản</th>
+                            <th>Mật khẩu</th>
+                            <th>Loại tài khoản</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
 
-    <!--
-      - #HERO SECTION
-    -->
+                        <% for (let i=0; i < listusers.length; i++) { %>
+                            <tr>
+                                <td><%= listusers[i].id %></td>
+                                <td><%= listusers[i].taikhoan %></td>
+                                <td><%= listusers[i].matkhau %></td>
+                                <td><%= listusers[i].loaiTK %></td>
+                                <td>
+                                    <a href="/AdminHome/edit_user" class="button1">
+                                        <button>Edit</button>
+                                    </a>
+                                    <a href="/Login" class="button1">
+                                        <button>Delete</button>
+                                    </a>
+                                    
+                                </td>
+                            </tr>
+                        <% } %>
+                        
+                    <tbody>
+                </table>
+            </div>
+        </div>
 
 
-    </div>
 
 
-  </main>
-
- 
-
-
-  <!--
-    - #FOOTER
-  -->
-
-  <footer>
-
-    <div class="container">
-
-      <div class="wrapper">
-
-        <p class="footer-text">
-          <span>Jim Rohn: </span>
-          "If you are not willing to risk the unusual, you will have to settle for the ordinary."
-        </p>
-
-      </div>
-
-
-      <div class="wrapper">
-
-        <p class="footer-title">Quick Links</p>
-
-        <ul>
-
-          <li>
-            <a href="#" class="footer-link">About Us</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">Contact Us</a>
-          </li>
-
-        </ul>
-
-      </div>
-
-      <div id="contact" class="wrapper">
-
-        <p class="footer-title">Contact</p>
-
-        <ul class="social-link">
-        
-          <li>
-            <a href="https://www.facebook.com/hoaiman208" class="icon-box facebook" target="_blank">
-              <span class="icon"><i class="fa fa-facebook" aria-hidden="true"></i></span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="https://www.linkedin.com/in/nguyenhoaiman/" class="icon-box linkedin" target="_blank">
-              <span class="icon"><i class="fa fa-linkedin" aria-hidden="true"></i></span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="https://github.com/Mannotcold" class="icon-box linkedin" target="_blank">
-              <span class="icon"><i class="fa fa-youtube" aria-hidden="true"></i></span>
-            </a>
-          </li>
-        
-        
-        </ul>
-
-      </div>
-
-    </div>
-
-    <p class="copyright">
-      &copy; Copyright 2024 <a href="#">NHM</a>
-    </p>
-
-  </footer>
+    </main>
 
 </body>
 

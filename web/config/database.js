@@ -1,5 +1,5 @@
 require('dotenv').config();
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 // test database
 // Create the connection to database
 // const connection = mysql.createConnection({
@@ -21,6 +21,7 @@ const connection = mysql.createPool({
     connectionLimit: 10,
     queuelimit: 0
 });
+
 
 
 module.exports = connection;
