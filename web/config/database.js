@@ -22,6 +22,4 @@ const connection = mysql.createPool({
     queuelimit: 0
 });
 
-
-
 module.exports = connection;
