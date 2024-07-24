@@ -1,5 +1,10 @@
 const connection = require('../config/database')
 const { getAllUsers, getUserbyID, updateUserbyID, DeleteUserbyID } = require('../services/CRUDServives')
+
+const db = require('../models/index')
+const bcrypt = require('bcrypt');
+const { Account } = require('../models');
+
 const getHomepage = function (req, res, next) {
     res.render('Home.ejs');
 }
@@ -51,40 +56,63 @@ const getRegisterpage = function (req, res, next) {
     // res.send('sâsffsa');
 }
 
+// const postRegisterpage = async function (req, res, next) {
+
+//     let username = req.body.username;
+//     let password = req.body.password;
+//     let role = req.body.type;
+
+//     // let [username, password, type ]  = req.body;
+
+//     // with placeholder
+//     // connection.query(
+//     //     `INSERT INTO Users (taikhoan, matkhau, loaiTK) VALUES (?, ?, ?)`,
+//     //     [username, password, type],
+//     //     function (err, results) {
+//     //         console.log(results);
+//     //         res.send('thanh cong');
+//     //     }
+//     // );
+//     // const [results, fields] = connection.query(
+//     //     `INSERT INTO Users (taikhoan, matkhau, loaiTK) VALUES (?, ?, ?)`,
+//     //     [username, password, type]
+//     // );
+
+//     // console.log(">>>req.body: ", username, password, type);
+
+    
+
+//     // const [results, fields] = await connection.query(
+//     //     'INSERT INTO Users (taikhoan, matkhau, loaiTK) VALUES (?, ?, ?)',
+//     //     [username, password, type]
+//     // );
+//     // console.log(">>>req.body: ", results);
+//     // res.send('thanh cong');
+// }
+
 const postRegisterpage = async function (req, res, next) {
+    try {
+        let username = req.body.username;
+        let password = req.body.password;
+        let role = req.body.type;
 
-    let username = req.body.username;
-    let password = req.body.password;
-    let type = req.body.type;
+        // Hash mật khẩu trước khi lưu vào cơ sở dữ liệu
+        const passwordHash = await bcrypt.hash(password, 10);
 
-    // let [username, password, type ]  = req.body;
+        // Thêm bản ghi vào bảng Accounts
+        await Account.create({
+            username: username,
+            password_hash: passwordHash,
+            role: role,
+        });
 
-    // with placeholder
-    // connection.query(
-    //     `INSERT INTO Users (taikhoan, matkhau, loaiTK) VALUES (?, ?, ?)`,
-    //     [username, password, type],
-    //     function (err, results) {
-    //         console.log(results);
-    //         res.send('thanh cong');
-    //     }
-    // );
-    // const [results, fields] = connection.query(
-    //     `INSERT INTO Users (taikhoan, matkhau, loaiTK) VALUES (?, ?, ?)`,
-    //     [username, password, type]
-    // );
-
-    // console.log(">>>req.body: ", username, password, type);
-
-    const [results, fields] = await connection.query(
-        'INSERT INTO Users (taikhoan, matkhau, loaiTK) VALUES (?, ?, ?)',
-        [username, password, type]
-    );
-    console.log(">>>req.body: ", results);
-    res.send('thanh cong');
-    // res.send('sâsffsa');
-}
-
-
+        // Trả về phản hồi thành công
+        res.status(201).json({ message: 'User registered successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'An error occurred while registering the user' });
+    }
+};
 
 let user = [];
 const getProductpage = (req, res) => {

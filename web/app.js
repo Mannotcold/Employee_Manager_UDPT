@@ -5,8 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config();
 const configViewEngine = require('./config/viewEngine')
-const connection = require('./config/database')
-
 
 const port = 3000;
 var indexRouter = require('./routes/index');
@@ -50,8 +48,6 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
 
 // A simple SELECT query
 // connection.query(
