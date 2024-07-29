@@ -113,16 +113,16 @@
                             <% for (let i=0; i < listusers.length; i++) { %>
                                 <tr>
                                     <td>
-                                        <%= listusers[i].id %>
+                                        <%= listusers[i].id_accounts %>
                                     </td>
                                     <td>
-                                        <%= listusers[i].taikhoan %>
+                                        <%= listusers[i].username %>
                                     </td>
                                     <td>
-                                        <%= listusers[i].matkhau %>
+                                        <%= listusers[i].password_hash %>
                                     </td>
                                     <td>
-                                        <%= listusers[i].loaiTK %>
+                                        <%= listusers[i].role %>
                                     </td>
                                     <td>
                                         <a href="/AdminHome/edit_user/<%= listusers[i].id %>" class="button1">

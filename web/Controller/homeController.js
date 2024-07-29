@@ -100,11 +100,10 @@ const postRegisterpage = async function (req, res, next) {
         const passwordHash = await bcrypt.hash(password, 10);
 
         // Thêm bản ghi vào bảng Accounts
-        await Account.create({
-            username: username,
-            password_hash: passwordHash,
-            role: role,
-        });
+        const [results, fields] = await connection.query(
+            'INSERT INTO Accounts (username, password_hash, role) VALUES (?, ?, ?)',
+            [username, passwordHash, role]
+        );
 
         // Trả về phản hồi thành công
         res.status(201).json({ message: 'User registered successfully' });
