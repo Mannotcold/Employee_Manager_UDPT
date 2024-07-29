@@ -5,6 +5,61 @@ const getAllUsers = async () => {
     return results;
 }
 
+const getAllProfile = async () => {
+    let [results, fields] = await connection.query(`SELECT * FROM Employees`);
+
+    // Định dạng lại ngày tháng cho tất cả các dòng
+    results.forEach(user => {
+        if (user.dob) {
+            user.dob = new Date(user.dob).toISOString().split('T')[0];
+        }
+    });
+
+    return results;
+}
+
+
+async function searchUsers(keyword, category) {
+
+    if (category === "citizen_id") {
+        let query = "SELECT * FROM Employees WHERE citizen_id LIKE ?";
+        let params = [`%${keyword}%`];
+        let [results, fields] = await connection.query(query, params); // db.query là hàm thực hiện truy vấn SQL trong database
+
+        return results;
+    }
+
+    if (category === "phone") {
+        let query = "SELECT * FROM Employees WHERE phone LIKE ?";
+        let params = [`%${keyword}%`];
+        let [results, fields] = await connection.query(query, params); // db.query là hàm thực hiện truy vấn SQL trong database
+
+        return results;
+    }
+
+    if (category === "name") {
+        let query = "SELECT * FROM Employees WHERE name LIKE ?";
+        let params = [`%${keyword}%`];
+        let [results, fields] = await connection.query(query, params); // db.query là hàm thực hiện truy vấn SQL trong database
+
+        return results;
+    }
+
+}
+
+
+const getProfileUserbyID = async (PaperId) => {
+    let [results, fields] = await connection.query(`SELECT * FROM Employees WHERE employee_id = ?`, [PaperId]);
+    let User = results && results.length > 0 ? results[0] : {};
+    results.forEach(user => {
+        if (user.dob) {
+            user.dob = new Date(user.dob).toISOString().split('T')[0];
+        }
+    });
+    return results;
+}
+
+
 
 const getUserbyID = async (userId) => {
     let [results, fields] = await connection.query(`select * from Users u where id = ?`, [userId]);
@@ -27,5 +82,5 @@ const DeleteUserbyID = async (userID) => {
 
 
 module.exports = {
-    getAllUsers, getUserbyID, updateUserbyID, DeleteUserbyID
+    getAllUsers, getUserbyID, updateUserbyID, DeleteUserbyID, getAllProfile, searchUsers, getProfileUserbyID
 }

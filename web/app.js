@@ -7,7 +7,6 @@ require('dotenv').config();
 const configViewEngine = require('./config/viewEngine')
 
 const port = 3000;
-var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var HomeRouter = require('./routes/Home');
 var LoginRouter = require('./routes/Login');

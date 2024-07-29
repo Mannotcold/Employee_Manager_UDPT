@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update paper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+        integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/stylesheets/stylelogin.css">
+    <!-- google font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body class="light-theme">
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="flex-wrapper">
+                    <ul class="desktop-nav">
+                        <li><a href="/AuthurHome" class="nav-link">Profile</a></li>
+                        <li><a href="/AuthurHome/PaperSearchAuthur" class="nav-link">Papers</a></li>
+                        <li><a href="/AuthurHome/CreatePaper" class="nav-link">Create Paper</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                    <a href="/" class="button1">
+                        <h1>Logout</h1>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <!-- /AuthurHome/PaperSearchAuthur/Update_Paper -->
+        <form action="/adminhome/ViewProfile/UpdateProfile" method="post">
+            <div class="form-wrapper">
+                <img src="/images/Author.jpg" alt="Descriptive image text" class="form-image">
+                <div class="form-container">
+                    <h2>View paper</h2>
+                    <div class="form-group d-none">
+                        <label for="name">Id:</label>
+                        <input type="text" value="<%= listProfile[0].employee_id %>" name="employee_id" placeholder="Enter your name"
+                            autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Name:</label>
+                        <input type="text" value="<%= listProfile[0].name %>" name="name" placeholder="Enter your name"
+                            required autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="author_string_list">Dob:</label>
+                        <input type="text" value="<%= listProfile[0].dob %>" name="dob"
+                            placeholder="dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="abstract">gender:</label>
+                        <input type="text" value="<%= listProfile[0].gender %>" name="gender" placeholder="gender"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="conference_id">citizen_id:</label>
+                        <input type="text" value="<%= listProfile[0].citizen_id %>" name="citizen_id"
+                            placeholder="citizen_id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="topic_id">tax_code:</label>
+                        <input type="text" value="<%= listProfile[0].tax_code %>" name="tax_code" placeholder="tax_code"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="topic_id">address:</label>
+                        <input type="text" value="<%= listProfile[0].address %>" name="address" placeholder="address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="topic_id">phone:</label>
+                        <input type="text" value="<%= listProfile[0].phone %>" name="phone" placeholder="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="topic_id">email:</label>
+                        <input type="text" value="<%= listProfile[0].email %>" name="email" placeholder="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="topic_id">bank_account:</label>
+                        <input type="text" value="<%= listProfile[0].bank_account %>" name="bank_account" placeholder="bank_account" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="topic_id">point_reward:</label>
+                        <input type="text" value="<%= listProfile[0].point_reward %>" name="point_reward" placeholder="point_reward" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Add you</button>
+                </div>
+                <a href="/" class="icon-box">
+                    <span class="icon_close"><i class="fa fa-times close-btn" aria-hidden="true"></i></span>
+                </a>
+            </div>
+        </form>
+
+    </main>
+</body>
+
+</html>

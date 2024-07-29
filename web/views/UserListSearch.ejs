@@ -1,0 +1,57 @@
+<h1>
+    <%= JSON.stringify() %>
+</h1>
+<% if (listUser && listUser.length> 0) { %>
+    <table id="paperTable" class="fl-table">
+        <thead>
+            
+        </thead>
+        <tbody>
+            <% listUser.forEach(function(User) { %>
+                <tr>
+                    <td>
+                        <%= User.employee_id %>
+                    </td>
+                    <td>
+                        <%= User.name %>
+                    </td>
+                    <td>
+                        <%= User.dob %>
+                    </td>
+                    <td>
+                        <%= User.gender %>
+                    </td>
+                    <td>
+                        <%= User.citizen_id %>
+                    </td>
+                    <td>
+                        <%= User.tax_code %>
+                    </td>
+                    <td>
+                        <%= User.address %>
+                    </td>
+                    <td>
+                        <%= User.phone %>
+                    </td>
+                    <td>
+                        <%= User.email %>
+                    </td>
+                    <td>
+                        <%= User.bank_account %>
+                    </td>
+                    <td>
+                        <%= User.point_reward %>
+                    </td>
+                    <td>
+                        <a href="" class="button1">
+                            <button>Edit</button>
+                        </a>
+    
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+    <% } else { %>
+        <p>No papers found.</p>
+        <% } %>
