@@ -1,6 +1,6 @@
 const connection = require('../config/database');
 
-const { getAllProfile, searchUsers, getProfileUserbyID } = require('../services/CRUDServives')
+const { getAllProfile, searchUsers, getProfileUserbyID, DeleteProfileUserbyID } = require('../services/CRUDServives')
 
 const ViewProfileUser = async function (req, res, next) {
     try {
@@ -65,6 +65,14 @@ const getUpdateUser = async function (req, res, next) {
     res.render('UpdateProfileUser.ejs', { listProfile: User });
 }
 
+const postDeleteUser = async function (req, res, next) {
+
+    const UserId = req.params.id;
+    console.log(UserId);
+    let User = await DeleteProfileUserbyID(UserId);
+    res.redirect(`/adminhome`)
+}
+
 
 const getSearch = async function (req, res, next) {
     try {
@@ -91,5 +99,5 @@ const getSearch = async function (req, res, next) {
 
 
 module.exports = {
-    ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile
+    ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser
 }

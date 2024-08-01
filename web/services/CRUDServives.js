@@ -59,6 +59,27 @@ const getProfileUserbyID = async (PaperId) => {
     return results;
 }
 
+const DeleteProfileUserbyID = async (employeeId) => {
+    try {
+        await connection.query('DELETE FROM Activities WHERE employee_id = ?', [employeeId]);
+        await connection.query('DELETE FROM TIMESHEET WHERE employee_id = ?', [employeeId]);
+        await connection.query('DELETE FROM REQUEST WHERE employee_id = ?', [employeeId]);
+        await connection.query('DELETE FROM LEAVEREQUEST WHERE employee_id = ?', [employeeId]);
+        await connection.query('DELETE FROM WFH WHERE employee_id = ?', [employeeId]);
+        await connection.query('DELETE FROM UpdateHistory WHERE employee_id = ?', [employeeId]);
+        await connection.query('DELETE FROM RedemptionRequests WHERE employee_id = ?', [employeeId]);
+        const [results, fields] = await connection.query('DELETE FROM Employees WHERE employee_id = ?', [employeeId]);
+
+        console.log(results);
+        return results;
+    } catch (error) {
+        console.error('Error deleting profile:', error);
+        throw error;
+    }
+};
+
+
+
 
 
 const getUserbyID = async (userId) => {
@@ -82,5 +103,5 @@ const DeleteUserbyID = async (userID) => {
 
 
 module.exports = {
-    getAllUsers, getUserbyID, updateUserbyID, DeleteUserbyID, getAllProfile, searchUsers, getProfileUserbyID
+    getAllUsers, getUserbyID, updateUserbyID, DeleteUserbyID, getAllProfile, searchUsers, getProfileUserbyID, DeleteProfileUserbyID
 }

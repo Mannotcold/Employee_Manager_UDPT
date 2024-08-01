@@ -137,9 +137,12 @@
                                     <%= User.point_reward %>
                                 </td>
                                 <td>
-                                    <a href="/adminhome/ViewProfile/SearchUser/<%= User.employee_id %>" class="button1">
+                                    <a href="/adminhome/ViewProfile/SearchUser/<%= User.employee_id %>" class="button">
                                         <button>Edit</button>
                                     </a>
+                                    <form action="/adminhome/ViewProfile/DeleteUser/<%= User.employee_id %>" method="post" class="button1 delete-form">
+                                        <button type="submit">Delete</button>
+                                    </form>
                                 
                                 </td>
                             </tr>
@@ -158,9 +161,7 @@
     <!-- Script to handle the click event -->
     <script>
         $(document).ready(function () {
-            $(document).on("click", "#home", function () {
-                alert("tác động vào dom");
-            });
+            
 
             $('.btn-search').on('click', function () {
                 var keyword = $('.search-input').val(); // Lấy từ khoá tìm kiếm từ input
@@ -179,6 +180,17 @@
                     }
                 });
             });
+
+            $('.delete-form button').click(function (event) {
+                event.preventDefault(); // Ngăn chặn hành vi mặc định của nút
+                var form = $(this).closest('form'); // Lấy biểu mẫu xóa
+
+                // Hiển thị hộp thoại xác nhận
+                if (confirm("Bạn có chắc chắn muốn xóa không?")) {
+                    form.submit(); // Nếu xác nhận, gửi biểu mẫu
+                }
+            });
+
 
             var itemsPerPage = 10; // Số lượng mục trên mỗi trang
             var currentPage = 1; // Trang hiện tại
