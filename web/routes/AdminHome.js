@@ -8,7 +8,6 @@ var router = express.Router();
 router.get('/', getAdminpage);
 router.get('/Register', getRegisterpage);
 
-
 //Trang quản lý profile
 router.get('/ViewProfile', ViewProfileUser);
 router.get('/search', getSearch);
