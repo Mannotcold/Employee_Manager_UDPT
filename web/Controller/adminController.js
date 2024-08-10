@@ -28,7 +28,30 @@ const postApproveRequest = async function (req, res, next) {
         // Lấy các thông tin từ request body
         let requestId = req.params.id;
         let status = 'Approved';
-        console.log("sdfdfs",requestId);
+        // Thực hiện câu lệnh SQL để cập nhật status
+        const [results, fields] = await connection.query(
+            `UPDATE REQUEST 
+            SET status = ? 
+            WHERE id_request = ?`,
+            [status, requestId]
+        );
+
+        // Ghi log kết quả của câu lệnh SQL
+        console.log(">>>results: ", results);
+
+        // Chuyển hướng về trang quản lý yêu cầu hoặc trang khác phù hợp
+        return res.redirect('/adminhome/ViewRequests');
+    } catch (error) {
+        console.error(">>>Error: ", error);
+        next(error);
+    }
+};
+
+const postDisapproveRequest = async function (req, res, next) {
+    try {
+        // Lấy các thông tin từ request body
+        let requestId = req.params.id;
+        let status = 'Disapproved';
         // Thực hiện câu lệnh SQL để cập nhật status
         const [results, fields] = await connection.query(
             `UPDATE REQUEST 
@@ -136,5 +159,5 @@ const getSearch = async function (req, res, next) {
 
 
 module.exports = {
-    ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser, ViewRequestUser, postApproveRequest
+    ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser, ViewRequestUser, postApproveRequest, postDisapproveRequest
 }
