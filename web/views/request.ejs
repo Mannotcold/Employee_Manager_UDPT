@@ -94,12 +94,13 @@
             <div class="table-wrapper">
 
                 <div class="title">
-                    <h1>List User</h1>
+                    <h1>Request User</h1>
                 </div>
                 <table class="fl-table">
 
                     <thead>
                         <tr>
+                            <th>id_request</th>
                             <th>employee_id</th>
                             <th>request_type</th>
                             <th>request_date</th>
@@ -113,6 +114,9 @@
 
                         <% for (let i=0; i < listUser.length; i++) { %>
                             <tr>
+                                <td>
+                                    <%= listUser[i].id_request %>
+                                </td>
                                 <td>
                                     <%= listUser[i].employee_id %>
                                 </td>
@@ -129,11 +133,11 @@
                                     <%= listUser[i].notes %>
                                 </td>
                                 <td>
-                                    <a href="/AdminHome/edit_use%>" class="button1">
-                                        <button>Edit</button>
-                                    </a>
-                                    <form action="/AdminHome/delete_user %>" method="post">
-                                        <button>Delete</button>
+                                    <form action="/AdminHome/request/Approve/<%= listUser[i].employee_id %>" method="post">
+                                        <button>Approve</button>
+                                    </form>
+                                    <form action="/AdminHome/request/Approve/<%= listUser[i].employee_id %>" method="post">
+                                        <button>Disapprove</button>
                                     </form>
 
                                 </td>
@@ -144,8 +148,6 @@
                 </table>
             </div>
         </div>
-
-
 
 
     </main>

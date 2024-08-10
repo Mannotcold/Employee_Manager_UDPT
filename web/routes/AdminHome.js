@@ -1,6 +1,6 @@
 var express = require('express');
 const { getAdminpage, getRegisterpage, postRegisterpage, getedituserpage, postUpdatepage, postDeletepage } = require('../Controller/homeController')
-const { ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser, ViewRequestUser } = require('../Controller/adminController')
+const { ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser, ViewRequestUser, postApproveRequest } = require('../Controller/adminController')
 
 var router = express.Router();
 
@@ -17,6 +17,8 @@ router.post('/ViewProfile/UpdateProfile', postUpdateProfile);
 
 //Trang quản lý request
 router.get('/request', ViewRequestUser);
+router.post('/request/Approve/:id', postApproveRequest);
+router.get('/request/Disapprove/:id', ViewRequestUser);
 
 
 router.post('/Register/Create_user', postRegisterpage);
