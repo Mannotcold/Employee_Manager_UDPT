@@ -18,6 +18,19 @@ const getAllProfile = async () => {
     return results;
 }
 
+const getRequest = async () => {
+    let [results, fields] = await connection.query(`SELECT * FROM REQUEST`);
+    
+    // Định dạng lại ngày tháng cho tất cả các dòng
+    results.forEach(REQUEST => {
+        if (REQUEST.request_date) {
+            REQUEST.request_date = new Date(REQUEST.request_date).toISOString().split('T')[0];
+        }
+    });
+
+    return results;
+}
+
 
 async function searchUsers(keyword, category) {
 
@@ -104,5 +117,5 @@ const DeleteUserbyID = async (userID) => {
 
 
 module.exports = {
-    getAllUsers, getUserbyID, updateUserbyID, DeleteUserbyID, getAllProfile, searchUsers, getProfileUserbyID, DeleteProfileUserbyID
+    getAllUsers, getUserbyID, updateUserbyID, DeleteUserbyID, getAllProfile, searchUsers, getProfileUserbyID, DeleteProfileUserbyID, getRequest
 }

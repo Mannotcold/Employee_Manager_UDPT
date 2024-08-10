@@ -1,11 +1,22 @@
 const connection = require('../config/database');
 
-const { getAllProfile, searchUsers, getProfileUserbyID, DeleteProfileUserbyID } = require('../services/CRUDServives')
+const { getAllProfile, searchUsers, getProfileUserbyID, DeleteProfileUserbyID, getRequest } = require('../services/CRUDServives')
 
 const ViewProfileUser = async function (req, res, next) {
     try {
         let results = await getAllProfile();
         res.render('ViewProfile.ejs', { listUser: results });
+    } catch (error) {
+        console.error('Error retrieving papers:', error);
+        next(error);
+    }
+}
+
+const ViewRequestUser = async function (req, res, next) {
+    try {
+        let results = await getRequest();
+        console.log(results);
+        res.render('request.ejs', { listUser: results });
     } catch (error) {
         console.error('Error retrieving papers:', error);
         next(error);
@@ -99,5 +110,5 @@ const getSearch = async function (req, res, next) {
 
 
 module.exports = {
-    ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser
+    ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser, ViewRequestUser
 }
