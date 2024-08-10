@@ -28,6 +28,7 @@ const postApproveRequest = async function (req, res, next) {
         // Lấy các thông tin từ request body
         let requestId = req.params.id;
         let status = 'Approved';
+
         // Thực hiện câu lệnh SQL để cập nhật status
         const [results, fields] = await connection.query(
             `UPDATE REQUEST 
@@ -39,19 +40,21 @@ const postApproveRequest = async function (req, res, next) {
         // Ghi log kết quả của câu lệnh SQL
         console.log(">>>results: ", results);
 
-        // Chuyển hướng về trang quản lý yêu cầu hoặc trang khác phù hợp
-        return res.redirect('/adminhome/ViewRequests');
+        // Trả về phản hồi JSON thay vì redirect
+        return res.json({ message: 'Request approved successfully!', results: results });
     } catch (error) {
         console.error(">>>Error: ", error);
         next(error);
     }
 };
 
+
 const postDisapproveRequest = async function (req, res, next) {
     try {
         // Lấy các thông tin từ request body
         let requestId = req.params.id;
         let status = 'Disapproved';
+
         // Thực hiện câu lệnh SQL để cập nhật status
         const [results, fields] = await connection.query(
             `UPDATE REQUEST 
@@ -63,8 +66,8 @@ const postDisapproveRequest = async function (req, res, next) {
         // Ghi log kết quả của câu lệnh SQL
         console.log(">>>results: ", results);
 
-        // Chuyển hướng về trang quản lý yêu cầu hoặc trang khác phù hợp
-        return res.redirect('/adminhome/ViewRequests');
+        // Trả về phản hồi JSON thay vì redirect
+        return res.json({ message: 'Request disapproved successfully!', results: results });
     } catch (error) {
         console.error(">>>Error: ", error);
         next(error);

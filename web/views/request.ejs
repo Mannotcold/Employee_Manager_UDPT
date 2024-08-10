@@ -7,97 +7,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
 
-    <!--
-    - custom css link
-  -->
+    <!-- custom css link -->
     <link rel="stylesheet" href="/stylesheets/styleadminhome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
         integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!--
-    - google font link
-  -->
+
+    <!-- google font link -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 
-    <!-- <script>$(document).ready(function () {
-            $(".btnDelete").click(function () {
-                const id = $(this).attr('data-id');
-                if (confirm(`Are you sure to delete this tutorial, id = $(id)`)) {
-                    $.ajax({
-                        url: `${window.location.origin}/api/tutorials/${id}`,
-                        method: "DELETE",
-                        success: (result) => {
-                            console.log(result);
-                            $(this).closest("tr").remove();
-                        },
-                        error: function (error) {
-                            console.log(">>> ajax error:", error)
-                        }
-                    });
-                } else {
-                    // Do nothing!
-                }
-            });
-        });</script> -->
 </head>
 
 <body class="light-theme">
 
-    <!-- <!- - #HEADER -> -->
-
-
     <header>
-
         <div class="container">
-
             <nav class="navbar">
-
-
                 <div class="flex-wrapper">
-
                     <ul class="desktop-nav">
-
                         <li>
                             <a href="/adminhome" class="nav-link">Home</a>
                         </li>
-
                         <li>
                             <a href="/adminhome/Register" class="nav-link">Create User</a>
                         </li>
-
                         <li>
                             <a href="/adminhome/ViewProfile" class="nav-link">View Profile</a>
                         </li>
-
                         <li>
                             <a href="#contact" class="nav-link">Contact</a>
                         </li>
-
                     </ul>
-
                     <a href="/Login" class="button1">
                         <h1>Login</h1>
                     </a>
                 </div>
-
             </nav>
-
         </div>
-
     </header>
 
     <main>
-
         <div>
             <div class="table-wrapper">
-
                 <div class="title">
                     <h1>Request User</h1>
                 </div>
                 <table class="fl-table">
-
                     <thead>
                         <tr>
                             <th>id_request</th>
@@ -110,10 +67,8 @@
                         </tr>
                     </thead>
                     <tbody>
-
-
                         <% for (let i=0; i < listUser.length; i++) { %>
-                            <tr>
+                            <tr data-id="<%= listUser[i].id_request %>">
                                 <td>
                                     <%= listUser[i].id_request %>
                                 </td>
@@ -126,31 +81,95 @@
                                 <td>
                                     <%= listUser[i].request_date %>
                                 </td>
-                                <td>
+                                <td class="status">
                                     <%= listUser[i].status %>
                                 </td>
                                 <td>
                                     <%= listUser[i].notes %>
                                 </td>
                                 <td>
-                                    <form action="/AdminHome/request/Approve/<%= listUser[i].employee_id %>" method="post">
-                                        <button>Approve</button>
+                                    <form class="approve-form"
+                                        action="/AdminHome/request/Approve/<%= listUser[i].employee_id %>"
+                                        method="post">
+                                        <button type="submit">Approve</button>
                                     </form>
-                                    <form action="/AdminHome/request/Approve/<%= listUser[i].employee_id %>" method="post">
-                                        <button>Disapprove</button>
+                                    <form class="disapprove-form"
+                                        action="/AdminHome/request/Disapprove/<%= listUser[i].employee_id %>"
+                                        method="post">
+                                        <button type="submit">Disapprove</button>
                                     </form>
-
                                 </td>
                             </tr>
                             <% } %>
-
-                    <tbody>
+                    </tbody>
                 </table>
             </div>
         </div>
-
-
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Xử lý khi bấm nút Approve
+            document.querySelectorAll('.approve-form').forEach(function (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault(); // Ngăn không cho gửi form theo cách thông thường
+                    const formElement = e.target;
+                    const id = formElement.getAttribute('action').split('/').pop();
+                    const confirmApprove = confirm('Are you sure you want to approve this request?');
+
+                    if (confirmApprove) {
+                        // Gửi yêu cầu AJAX
+                        fetch(formElement.action, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ id: id })
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                alert('Request approved successfully!');
+                                // Cập nhật trạng thái trong giao diện
+                                formElement.closest('tr').querySelector('.status').innerText = 'Approved';
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    }
+                });
+            });
+
+            // Xử lý khi bấm nút Disapprove
+            document.querySelectorAll('.disapprove-form').forEach(function (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault(); // Ngăn không cho gửi form theo cách thông thường
+                    const formElement = e.target;
+                    const id = formElement.getAttribute('action').split('/').pop();
+                    const confirmDisapprove = confirm('Are you sure you want to disapprove this request?');
+
+                    if (confirmDisapprove) {
+                        // Gửi yêu cầu AJAX
+                        fetch(formElement.action, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ id: id })
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                alert('Request disapproved successfully!');
+                                // Cập nhật trạng thái trong giao diện
+                                formElement.closest('tr').querySelector('.status').innerText = 'Disapproved';
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 

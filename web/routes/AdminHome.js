@@ -18,7 +18,7 @@ router.post('/ViewProfile/UpdateProfile', postUpdateProfile);
 //Trang quản lý request
 router.get('/request', ViewRequestUser);
 router.post('/request/Approve/:id', postApproveRequest);
-router.get('/request/Disapprove/:id', postDisapproveRequest);
+router.post('/request/Disapprove/:id', postDisapproveRequest);
 
 
 router.post('/Register/Create_user', postRegisterpage);
