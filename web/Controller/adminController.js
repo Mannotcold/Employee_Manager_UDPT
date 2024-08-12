@@ -12,6 +12,7 @@ const ViewProfileUser = async function (req, res, next) {
     }
 }
 
+
 const ViewRequestUser = async function (req, res, next) {
     try {
         let results = await getRequest();
