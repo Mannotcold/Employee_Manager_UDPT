@@ -55,8 +55,8 @@ let handleLogin = async (req, res) => {
         if (user.role === "admin") {
             return res.redirect('/adminhome');
         }
-        if (user.role === "member") {
-            return res.redirect('/AuthurHome');
+        if (user.role === "employee") {
+            return res.redirect('/usersHome');
         }
 
     } catch (err) {
@@ -69,7 +69,16 @@ let handleLogin = async (req, res) => {
 }
 
 
+const HomeUser = async function (req, res, next) {
+    try {
+        res.render('usersHome.ejs');
+    } catch (error) {
+        console.error('Error retrieving papers:', error);
+        next(error);
+    }
+}
+
 
 module.exports = {
-    handleLogin
+    handleLogin, HomeUser
 }

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Request</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/stylesheets/styleuser.css">
+
+  <!-- google font link -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body class="light-theme">
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <div class="flex-wrapper">
+          <ul class="desktop-nav">
+            <li><a href="/" class="nav-link">Home</a></li>
+            <li><a href="/EmployeeHome" class="nav-link">Employee Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+          </ul>
+          <a href="/Logout" class="button1">
+            <h1>Logout</h1>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="form-wrapper">
+      
+      <div class="form-container">
+        <h2>Employee Request Form</h2>
+        <form action="/EmployeeHome/Request" method="post">
+          <div class="form-group">
+            <label for="employee_id">Employee ID:</label>
+            <input type="text" id="employee_id" name="employee_id" placeholder="Enter your Employee ID" required
+              autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="request_type">Request Type:</label>
+            <select id="request_type" name="request_type" required>
+              <option value="Leave">Leave</option>
+              <option value="WFH">Work From Home</option>
+              <option value="Overtime">Overtime</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="request_date">Request Date:</label>
+            <input type="date" id="request_date" name="request_date" required>
+          </div>
+          <div class="form-group">
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+              <option value="Pending">Pending</option>
+              <option value="Approved">Approved</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="notes">Notes:</label>
+            <textarea id="notes" name="notes" placeholder="Enter additional notes"></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Submit Request</button>
+        </form>
+        <p><a class="link" href="/EmployeeHome/ViewRequests">View Existing Requests</a></p>
+      </div>
+      <a href="/" class="icon-box">
+        <span class="icon_close"><i class="fa fa-times close-btn" aria-hidden="true"></i></span>
+      </a>
+    </div>
+  </main>
+</body>
+
+</html>

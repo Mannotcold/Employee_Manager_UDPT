@@ -7,7 +7,7 @@ require('dotenv').config();
 const configViewEngine = require('./config/viewEngine')
 
 const port = 3000;
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/usersHome');
 var HomeRouter = require('./routes/Home');
 var LoginRouter = require('./routes/Login');
 // var RegisterRouter = require('./routes/AdminHome');
@@ -30,7 +30,7 @@ app.use('/', HomeRouter);
 app.use('/Login', LoginRouter);
 // app.use('/Register', RegisterRouter);
 app.use('/AdminHome', AdminHomeRouter);
-app.use('/users', usersRouter);
+app.use('/usersHome', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -47,15 +47,6 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-// A simple SELECT query
-// connection.query(
-//   'SELECT * FROM Users',
-//   function (err, results, fields) {
-//     console.log("resurlts:", results); // results contains rows returned by server
-//     console.log("fields:", fields); // fields contains extra meta data about results, if available
-//   }
-// );
 
 
 
