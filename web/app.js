@@ -14,6 +14,7 @@ var LoginRouter = require('./routes/Login');
 var AdminHomeRouter = require('./routes/AdminHome');
 var app = express();
 
+
 //config req.body
 app.use(express.json()) // for Json
 app.use(express.urlencoded({extended: true })) // for form data
