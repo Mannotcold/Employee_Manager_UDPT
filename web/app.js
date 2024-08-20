@@ -6,7 +6,7 @@ var logger = require('morgan');
 require('dotenv').config();
 const configViewEngine = require('./config/viewEngine')
 
-const port = 3000;
+const port = 3001;
 var usersRouter = require('./routes/usersHome');
 var HomeRouter = require('./routes/Home');
 var LoginRouter = require('./routes/Login');

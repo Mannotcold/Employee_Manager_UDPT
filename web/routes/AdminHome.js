@@ -1,8 +1,20 @@
 var express = require('express');
+const axios = require('axios');
 const { getAdminpage, getRegisterpage, postRegisterpage, getedituserpage, postUpdatepage, postDeletepage } = require('../Controller/homeController')
 const { ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser, ViewRequestUser, postApproveRequest, postDisapproveRequest } = require('../Controller/adminController')
 
 var router = express.Router();
+
+router.get('/api-gateway/nhanvien', async (req, res, next) => {
+    try {
+        const response = await axios.get('http://localhost:8080/api/nhanvien');
+        res.json(response.data);
+        console.log(response.data);
+    } catch (error) {
+        console.error('Error fetching data from API Java:', error);
+        res.status(500).json({ error: 'Failed to fetch data from API Java' });
+    }
+});
 
 // /* GET register page. */
 router.get('/', getAdminpage);
