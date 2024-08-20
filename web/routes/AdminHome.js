@@ -16,6 +16,7 @@ router.get('/api-gateway/nhanvien', async (req, res, next) => {
     }
 });
 
+
 // /* GET register page. */
 router.get('/', getAdminpage);
 router.get('/Register', getRegisterpage);
