@@ -1,5 +1,5 @@
 const connection = require('../config/database')
-
+const axios = require('axios');
 const getAllUsers = async () => {
     let [results, fields] = await connection.query(`select * from Accounts u `);
     return results;
@@ -18,16 +18,19 @@ const getAllProfile = async () => {
     return results;
 }
 
-const getRequest = async () => {
-    let [results, fields] = await connection.query(`SELECT * FROM REQUEST`);
-    
-    // Định dạng lại ngày tháng cho tất cả các dòng
-    results.forEach(REQUEST => {
-        if (REQUEST.request_date) {
-            REQUEST.request_date = new Date(REQUEST.request_date).toISOString().split('T')[0];
-        }
-    });
 
+
+const getRequest = async () => {
+    let results;
+    try {
+        const response = await axios.get('http://localhost:8080/api/requests');
+        results = response.data;
+        
+        console.log(results);  // Sau đó log dữ liệu ra console
+    } catch (error) {
+        console.error('Error fetching data from API Java:', error);
+        
+    }
     return results;
 }
 

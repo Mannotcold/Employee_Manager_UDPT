@@ -5,9 +5,9 @@ const { ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDelete
 
 var router = express.Router();
 
-router.get('/api-gateway/nhanvien', async (req, res, next) => {
+router.get('/api/requests', async (req, res, next) => {
     try {
-        const response = await axios.get('http://localhost:8080/api/nhanvien');
+        const response = await axios.get('http://localhost:8080/api/requests');
         res.json(response.data);
         console.log(response.data);
     } catch (error) {
@@ -16,6 +16,8 @@ router.get('/api-gateway/nhanvien', async (req, res, next) => {
     }
 });
 
+// /* GET register page. */
+router.get('/ThuongDiem', getRegisterpage);
 
 // /* GET register page. */
 router.get('/', getAdminpage);
