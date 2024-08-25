@@ -1,6 +1,6 @@
 const connection = require('../config/database');
 const {  } = require('../Middleware/verifyToken')
-
+const { ViewUserRequest, SendUserRequest } = require('../services/RequestServices')
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = '123456';
 const bcrypt = require('bcrypt');
@@ -79,7 +79,19 @@ const HomeUser = async function (req, res, next) {
     }
 }
 
+const UserRequest = async function (req, res, next) {
+    const userId = req.user.userId;
+    try {
+        let results = await ViewUserRequest(userId);
+        // console.log("ten user", userId);
+        res.render('UserRequest.ejs', { listUser: results });
+    } catch (error) {
+        console.error('Error retrieving papers:', error);
+        next(error);
+    }
+}
+
 
 module.exports = {
-    handleLogin, HomeUser
+    handleLogin, HomeUser, UserRequest
 }

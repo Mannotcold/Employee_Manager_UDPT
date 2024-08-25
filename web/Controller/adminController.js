@@ -1,14 +1,10 @@
 const connection = require('../config/database');
-const { getRequest } = require('../services/RequestServices')
-const { handleLogin } = require('../Controller/userController')
-const verifyToken = require('../Middleware/verifyToken')
+const { getRequest, updateRequest } = require('../services/RequestServices')
+// const { handleLogin } = require('../Controller/userController')
+// const verifyToken = require('../Middleware/verifyToken')
 
 
 const { getAllProfile, searchUsers, getProfileUserbyID, DeleteProfileUserbyID } = require('../services/CRUDServives')
-
-
-
-
 
 const ViewProfileUser = async function (req, res, next) {
     // const userId = req.user.userId;
@@ -41,18 +37,9 @@ const postApproveRequest = async function (req, res, next) {
         // Lấy các thông tin từ request body
         let requestId = req.params.id;
         let status = 'Approved';
+        let userId = req.user.userId;
 
-        // Thực hiện câu lệnh SQL để cập nhật status
-        const [results, fields] = await connection.query(
-            `UPDATE REQUEST 
-            SET status = ? 
-            WHERE id_request = ?`,
-            [status, requestId]
-        );
-
-        // Ghi log kết quả của câu lệnh SQL
-        console.log(">>>results: ", results);
-
+        let results = await updateRequest(requestId, status, userId);;
         // Trả về phản hồi JSON thay vì redirect
         return res.json({ message: 'Request approved successfully!', results: results });
     } catch (error) {
@@ -67,21 +54,11 @@ const postDisapproveRequest = async function (req, res, next) {
         // Lấy các thông tin từ request body
         let requestId = req.params.id;
         let status = 'Disapproved';
+        let userId = req.user.userId;
 
-        // Thực hiện câu lệnh SQL để cập nhật status
-        const [results, fields] = await connection.query(
-            `UPDATE REQUEST 
-            SET status = ? 
-            WHERE id_request = ?`,
-            [status, requestId]
-        );
-
-        
-        // Ghi log kết quả của câu lệnh SQL
-        console.log(">>>results: ", results);
-
+        let results = await updateRequest(requestId, status, userId);;
         // Trả về phản hồi JSON thay vì redirect
-        return res.json({ message: 'Request disapproved successfully!', results: results });
+        return res.json({ message: 'Request approved successfully!', results: results });
     } catch (error) {
         console.error(">>>Error: ", error);
         next(error);
