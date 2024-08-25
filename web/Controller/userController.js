@@ -1,4 +1,6 @@
 const connection = require('../config/database');
+const {  } = require('../Middleware/verifyToken')
+
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = '123456';
 const bcrypt = require('bcrypt');
@@ -6,7 +8,6 @@ const bcrypt = require('bcrypt');
 let handleLogin = async (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
-    console.log("đasadsdsdsa", username);
     if (!username || !password) {
         return res.status(500).json({
             errCode: 1,

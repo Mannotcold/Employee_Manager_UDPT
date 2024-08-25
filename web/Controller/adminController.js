@@ -1,10 +1,19 @@
 const connection = require('../config/database');
+const { getRequest } = require('../services/RequestServices')
+const { handleLogin } = require('../Controller/userController')
+const verifyToken = require('../Middleware/verifyToken')
 
 
-const { getAllProfile, searchUsers, getProfileUserbyID, DeleteProfileUserbyID, getRequest } = require('../services/CRUDServives')
+const { getAllProfile, searchUsers, getProfileUserbyID, DeleteProfileUserbyID } = require('../services/CRUDServives')
+
+
+
+
 
 const ViewProfileUser = async function (req, res, next) {
+    // const userId = req.user.userId;
     try {
+        // console.log("asafsfsafsa", userId);
         let results = await getAllProfile();
         res.render('ViewProfile.ejs', { listUser: results });
     } catch (error) {
@@ -15,9 +24,11 @@ const ViewProfileUser = async function (req, res, next) {
 
 
 const ViewRequestUser = async function (req, res, next) {
+    
+    // const userId = req.user.userId;
     try {
         let results = await getRequest();
-        console.log(results);
+        // console.log("ten user", userId);
         res.render('request.ejs', { listUser: results });
     } catch (error) {
         console.error('Error retrieving papers:', error);
@@ -65,6 +76,7 @@ const postDisapproveRequest = async function (req, res, next) {
             [status, requestId]
         );
 
+        
         // Ghi log kết quả của câu lệnh SQL
         console.log(">>>results: ", results);
 

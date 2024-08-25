@@ -36,4 +36,5 @@ const verifyRole = (role) => (req, res, next) => {
     next();
 };
 
+
 module.exports = { verifyToken, verifyRole };

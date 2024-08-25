@@ -57,44 +57,41 @@
                 <table class="fl-table">
                     <thead>
                         <tr>
-                            <th>id_request</th>
-                            <th>employee_id</th>
-                            <th>request_type</th>
-                            <th>request_date</th>
-                            <th>status</th>
-                            <th>notes</th>
+                            <th>Request ID</th>
+                            <th>Employee ID</th>
+                            <th>Request Type</th>
+                            <th>Status</th>
+                            <th>Details</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% for (let i=0; i < listUser.length; i++) { %>
-                            <tr data-id="<%= listUser[i].id_request %>">
+                            <tr data-id="<%= listUser[i].requestId %>">
                                 <td>
-                                    <%= listUser[i].id_request %>
+                                    <%= listUser[i].requestId %>
                                 </td>
                                 <td>
-                                    <%= listUser[i].employee_id %>
+                                    <%= listUser[i].employeeId %>
                                 </td>
                                 <td>
-                                    <%= listUser[i].request_type %>
-                                </td>
-                                <td>
-                                    <%= listUser[i].request_date %>
+                                    <%= listUser[i].requestType %>
                                 </td>
                                 <td class="status">
                                     <%= listUser[i].status %>
                                 </td>
                                 <td>
-                                    <%= listUser[i].notes %>
+                                    Start Date: <%= listUser[i].details.startDate %><br>
+                                        End Date: <%= listUser[i].details.endDate %><br>
+                                            Reason: <%= listUser[i].details.reason %>
                                 </td>
                                 <td>
                                     <form class="approve-form"
-                                        action="/AdminHome/request/Approve/<%= listUser[i].employee_id %>"
-                                        method="post">
+                                        action="/AdminHome/request/Approve/<%= listUser[i].employeeId %>" method="post">
                                         <button type="submit">Approve</button>
                                     </form>
                                     <form class="disapprove-form"
-                                        action="/AdminHome/request/Disapprove/<%= listUser[i].employee_id %>"
+                                        action="/AdminHome/request/Disapprove/<%= listUser[i].employeeId %>"
                                         method="post">
                                         <button type="submit">Disapprove</button>
                                     </form>
