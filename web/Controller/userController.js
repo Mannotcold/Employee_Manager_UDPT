@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const SECRET_KEY = '123456';
 const bcrypt = require('bcrypt');
 
+
+// Login service
 let handleLogin = async (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
@@ -69,7 +71,7 @@ let handleLogin = async (req, res) => {
     }
 }
 
-
+// Request service
 const HomeUser = async function (req, res, next) {
     try {
         res.render('usersHome.ejs');
@@ -91,7 +93,13 @@ const UserRequest = async function (req, res, next) {
     }
 }
 
+const PostUserRequest = async function (req, res, next) {
+    
+    let User = await SendUserRequest();
+    res.redirect(`/adminhome`)
+}
+
 
 module.exports = {
-    handleLogin, HomeUser, UserRequest
+    handleLogin, HomeUser, UserRequest, PostUserRequest
 }

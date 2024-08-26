@@ -1,5 +1,5 @@
 const connection = require('../config/database')
-const { getAllUsers, getUserbyID, updateUserbyID, DeleteUserbyID } = require('../services/CRUDServives')
+const { getAllUsers, getUserbyID, updateUserbyID, DeleteUserbyID } = require('../services/LoginServives')
 
 const db = require('../models/index')
 const bcrypt = require('bcrypt');
@@ -82,7 +82,7 @@ const getRegisterpage = function (req, res, next) {
 
 //     // console.log(">>>req.body: ", username, password, type);
 
-    
+
 
 //     // const [results, fields] = await connection.query(
 //     //     'INSERT INTO Users (taikhoan, matkhau, loaiTK) VALUES (?, ?, ?)',

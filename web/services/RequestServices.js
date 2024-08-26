@@ -47,7 +47,7 @@ const ViewUserRequest = async (userId) => {
 const SendUserRequest = async (userId) => {
     let results;
     const requestData = {
-        requestId: 'REQ00123',
+        requestId: 'REQ00125',
         employeeId: userId,
         requestType: 'Leave Application',
         status: 'Pending',

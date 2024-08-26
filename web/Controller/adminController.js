@@ -1,26 +1,12 @@
 const connection = require('../config/database');
 const { getRequest, updateRequest } = require('../services/RequestServices')
-// const { handleLogin } = require('../Controller/userController')
-// const verifyToken = require('../Middleware/verifyToken')
+const { getAllProfile, searchUsers, getProfileUserbyID, DeleteProfileUserbyID } = require('../services/LoginServives')
 
 
-const { getAllProfile, searchUsers, getProfileUserbyID, DeleteProfileUserbyID } = require('../services/CRUDServives')
-
-const ViewProfileUser = async function (req, res, next) {
-    // const userId = req.user.userId;
-    try {
-        // console.log("asafsfsafsa", userId);
-        let results = await getAllProfile();
-        res.render('ViewProfile.ejs', { listUser: results });
-    } catch (error) {
-        console.error('Error retrieving papers:', error);
-        next(error);
-    }
-}
-
+// Request service
 
 const ViewRequestUser = async function (req, res, next) {
-    
+
     // const userId = req.user.userId;
     try {
         let results = await getRequest();
@@ -65,6 +51,23 @@ const postDisapproveRequest = async function (req, res, next) {
     }
 };
 
+
+
+
+
+// Profile service
+
+const ViewProfileUser = async function (req, res, next) {
+    // const userId = req.user.userId;
+    try {
+        // console.log("asafsfsafsa", userId);
+        let results = await getAllProfile();
+        res.render('ViewProfile.ejs', { listUser: results });
+    } catch (error) {
+        console.error('Error retrieving papers:', error);
+        next(error);
+    }
+}
 
 const postUpdateProfile = async function (req, res, next) {
     // Lấy các thông tin từ request body
@@ -111,7 +114,7 @@ const postUpdateProfile = async function (req, res, next) {
 
 
 const getUpdateUser = async function (req, res, next) {
-    
+
     const UserId = req.params.id;
     // console.log(UserId);
     let User = await getProfileUserbyID(UserId);
