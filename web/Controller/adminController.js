@@ -11,7 +11,7 @@ const ViewRequestUser = async function (req, res, next) {
     try {
         let results = await getRequest();
         // console.log("ten user", userId);
-        res.render('request.ejs', { listUser: results });
+        res.render('AdminRequest.ejs', { listUser: results });
     } catch (error) {
         console.error('Error retrieving papers:', error);
         next(error);

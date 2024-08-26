@@ -44,32 +44,31 @@ const ViewUserRequest = async (userId) => {
     return results;
 }
 
-const SendUserRequest = async (userId) => {
+const SendUserRequest = async (userId, requestType, requestDate, status, notes) => {
     let results;
     const requestData = {
-        requestId: 'REQ00125',
+        requestId: null, // MongoDB sẽ tự động tạo requestId
         employeeId: userId,
-        requestType: 'Leave Application',
-        status: 'Pending',
+        requestType: requestType,
+        status: status,
         details: {
-            startDate: '2024-09-01',
-            endDate: '2024-09-10',
-            reason: 'Annual Leave'
+            startDate: requestDate,  // Sử dụng requestDate từ form
+            reason: notes || 'No additional notes'  // Ghi chú từ form, nếu không có sẽ là 'No additional notes'
         },
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         approvedBy: null
     };
+
     try {
         const response = await axios.post(
             `http://localhost:8080/api/requests`,
-            requestData // Dữ liệu yêu cầu gửi trong request body
+            requestData // Gửi dữ liệu yêu cầu trong request body
         );
         results = response.data;
-
-        console.log(results);  // Sau đó log dữ liệu ra console
+        console.log(results);  // Log dữ liệu ra console
     } catch (error) {
-        console.error('Error fetching data from API Java:', error);
+        console.error('Error sending data to API Java:', error);
     }
     return results;
 }

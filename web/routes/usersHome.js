@@ -7,6 +7,6 @@ var router = express.Router();
 // /* Request page. */
 router.get('/', verifyToken, verifyRole('employee'), HomeUser);
 router.get('/YourRequest', verifyToken, verifyRole('employee'), UserRequest);
-router.get('/SendRequest', verifyToken, verifyRole('employee'), PostUserRequest);
+router.post('/SendRequest', verifyToken, verifyRole('employee'), PostUserRequest);
 
 module.exports = router;

@@ -74,7 +74,7 @@ let handleLogin = async (req, res) => {
 // Request service
 const HomeUser = async function (req, res, next) {
     try {
-        res.render('usersHome.ejs');
+        res.render('UserSendRequest.ejs');
     } catch (error) {
         console.error('Error retrieving papers:', error);
         next(error);
@@ -94,10 +94,13 @@ const UserRequest = async function (req, res, next) {
 }
 
 const PostUserRequest = async function (req, res, next) {
-    
-    let User = await SendUserRequest();
-    res.redirect(`/adminhome`)
+    const { employee_id, request_type, request_date, status, notes } = req.body;
+    let userId = employee_id;  // Lấy userId từ form
+
+    let User = await SendUserRequest(userId, request_type, request_date, status, notes);
+    res.redirect(`/usersHome/YourRequest`);  // Sau khi gửi yêu cầu, điều hướng đến trang "Your Request"
 }
+
 
 
 module.exports = {
