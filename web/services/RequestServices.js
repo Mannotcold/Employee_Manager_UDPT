@@ -44,10 +44,16 @@ const ViewUserRequest = async (userId) => {
     return results;
 }
 
+
+const generateRequestId = (userId) => {
+    const randomDigits = Math.floor(100 + Math.random() * 900); // Tạo số ngẫu nhiên có 3 chữ số
+    return `REQ${userId}${randomDigits}`;
+};
 const SendUserRequest = async (userId, requestType, requestDate, status, notes) => {
     let results;
+    const requestId = generateRequestId(userId);
     const requestData = {
-        requestId: null, // MongoDB sẽ tự động tạo requestId
+        requestId: requestId, // MongoDB sẽ tự động tạo requestId
         employeeId: userId,
         requestType: requestType,
         status: status,

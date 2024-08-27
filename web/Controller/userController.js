@@ -94,8 +94,9 @@ const UserRequest = async function (req, res, next) {
 }
 
 const PostUserRequest = async function (req, res, next) {
-    const { employee_id, request_type, request_date, status, notes } = req.body;
-    let userId = employee_id;  // Lấy userId từ form
+    const { request_type, request_date, notes } = req.body;
+    let status = "Pending"
+    const userId = req.user.userId;  // Lấy userId từ form
 
     let User = await SendUserRequest(userId, request_type, request_date, status, notes);
     res.redirect(`/usersHome/YourRequest`);  // Sau khi gửi yêu cầu, điều hướng đến trang "Your Request"
