@@ -44,7 +44,6 @@ const ViewUserRequest = async (userId) => {
     return results;
 }
 
-
 const generateRequestId = (userId) => {
     const randomDigits = Math.floor(100 + Math.random() * 900); // Tạo số ngẫu nhiên có 3 chữ số
     return `REQ${userId}${randomDigits}`;
