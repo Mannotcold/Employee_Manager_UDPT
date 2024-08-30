@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update paper</title>
+    <title>Update Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
         integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -39,60 +39,59 @@
             <div class="form-wrapper">
                 <img src="/images/Author.jpg" alt="Descriptive image text" class="form-image">
                 <div class="form-container">
-                    <h2>View paper</h2>
-                    <div class="form-group d-none">
-                        <label for="name">Id:</label>
-                        <input type="text" value="<%= listProfile[0].employee_id %>" name="employee_id" placeholder="Enter your name"
-                            autocomplete="off">
+                    <h2>Update Profile</h2>
+                    <div class="form-group">
+                        <label for="id">ID:</label>
+                        <input type="text" value="<%= listProfile.employeeId %>" name="employeeId" placeholder="Enter your ID"
+                            readonly>
                     </div>
                     <div class="form-group">
-                        <label for="title">Name:</label>
-                        <input type="text" value="<%= listProfile[0].name %>" name="name" placeholder="Enter your name"
+                        <label for="name">Name:</label>
+                        <input type="text" value="<%= listProfile.name %>" name="name" placeholder="Enter your name"
                             required autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label for="author_string_list">Dob:</label>
-                        <input type="text" value="<%= listProfile[0].dob %>" name="dob"
-                            placeholder="dob" required>
+                        <label for="dob">Date of Birth:</label>
+                        <input type="date" value="<%= listProfile.dob %>" name="dob"
+                            placeholder="Enter your date of birth" required>
                     </div>
                     <div class="form-group">
-                        <label for="abstract">gender:</label>
-                        <input type="text" value="<%= listProfile[0].gender %>" name="gender" placeholder="gender"
-                            required>
+                        <label for="gender">Gender:</label>
+                        <input type="text" value="<%= listProfile.gender %>" name="gender"
+                            placeholder="Enter your gender" required>
                     </div>
                     <div class="form-group">
-                        <label for="conference_id">citizen_id:</label>
-                        <input type="text" value="<%= listProfile[0].citizen_id %>" name="citizen_id"
-                            placeholder="citizen_id" required>
+                        <label for="citizen_id">Citizen ID:</label>
+                        <input type="text" value="<%= listProfile.citizenId %>" name="citizen_id"
+                            placeholder="Enter your citizen ID" required>
                     </div>
                     <div class="form-group">
-                        <label for="topic_id">tax_code:</label>
-                        <input type="text" value="<%= listProfile[0].tax_code %>" name="tax_code" placeholder="tax_code"
-                            required>
+                        <label for="tax_code">Tax Code:</label>
+                        <input type="text" value="<%= listProfile.taxCode %>" name="tax_code"
+                            placeholder="Enter your tax code" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" value="<%= listProfile.address %>" name="address"
+                            placeholder="Enter your address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input type="text" value="<%= listProfile.phone %>" name="phone"
+                            placeholder="Enter your phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" value="<%= listProfile.email %>" name="email"
+                            placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bank_account">Bank Account:</label>
+                        <input type="text" value="<%= listProfile.bankAccount %>" name="bank_account"
+                            placeholder="Enter your bank account number" required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="topic_id">address:</label>
-                        <input type="text" value="<%= listProfile[0].address %>" name="address" placeholder="address" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="topic_id">phone:</label>
-                        <input type="text" value="<%= listProfile[0].phone %>" name="phone" placeholder="phone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="topic_id">email:</label>
-                        <input type="text" value="<%= listProfile[0].email %>" name="email" placeholder="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="topic_id">bank_account:</label>
-                        <input type="text" value="<%= listProfile[0].bank_account %>" name="bank_account" placeholder="bank_account" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="topic_id">point_reward:</label>
-                        <input type="text" value="<%= listProfile[0].point_reward %>" name="point_reward" placeholder="point_reward" required>
-                    </div>
-
-                    <button type="submit" class="submit-btn">Add you</button>
+                    <button type="submit" class="submit-btn">Update Profile</button>
                 </div>
                 <a href="/" class="icon-box">
                     <span class="icon_close"><i class="fa fa-times close-btn" aria-hidden="true"></i></span>

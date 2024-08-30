@@ -1,7 +1,7 @@
 const connection = require('../config/database');
+const { getAllProfile, getProfileUserbyID } = require('../services/ProfileServices')
 const { getRequest, updateRequest } = require('../services/RequestServices')
-const { getAllProfile, searchUsers, getProfileUserbyID, DeleteProfileUserbyID } = require('../services/LoginServives')
-
+const {  searchUsers, DeleteProfileUserbyID } = require('../services/LoginServives')
 
 // Request service
 
@@ -71,6 +71,8 @@ const ViewProfileUser = async function (req, res, next) {
 
 const postUpdateProfile = async function (req, res, next) {
     // Lấy các thông tin từ request body
+    let ID = req.body.id;
+    console.log("hfbfb", ID)
     let employeeID = req.body.employee_id;
     let name = req.body.name;
     let dob = req.body.dob;
@@ -115,12 +117,13 @@ const postUpdateProfile = async function (req, res, next) {
 
 const getUpdateUser = async function (req, res, next) {
 
-    const UserId = req.params.id;
-    // console.log(UserId);
-    let User = await getProfileUserbyID(UserId);
+    const Id = req.params.id;
+    // console.log(Id);
+    let User = await getProfileUserbyID(Id);
     console.log(User);
     res.render('UpdateProfileUser.ejs', { listProfile: User });
 }
+
 
 const postDeleteUser = async function (req, res, next) {
 

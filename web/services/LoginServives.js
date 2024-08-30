@@ -20,20 +20,6 @@ const getAllProfile = async () => {
 
 
 
-const getRequest = async () => {
-    let results;
-    try {
-        const response = await axios.get('http://localhost:8080/api/requests');
-        results = response.data;
-        
-        console.log(results);  // Sau đó log dữ liệu ra console
-    } catch (error) {
-        console.error('Error fetching data from API Java:', error);
-        
-    }
-    return results;
-}
-
 
 async function searchUsers(keyword, category) {
 
@@ -64,8 +50,8 @@ async function searchUsers(keyword, category) {
 }
 
 
-const getProfileUserbyID = async (PaperId) => {
-    let [results, fields] = await connection.query(`SELECT * FROM Employees WHERE employee_id = ?`, [PaperId]);
+const getProfileUserbyID = async (Id) => {
+    let [results, fields] = await connection.query(`SELECT * FROM Employees WHERE employee_id = ?`, [Id]);
     let User = results && results.length > 0 ? results[0] : {};
     results.forEach(user => {
         if (user.dob) {
@@ -120,5 +106,5 @@ const DeleteUserbyID = async (userID) => {
 
 
 module.exports = {
-    getAllUsers, getUserbyID, updateUserbyID, DeleteUserbyID, getAllProfile, searchUsers, getProfileUserbyID, DeleteProfileUserbyID, getRequest
+    getAllUsers, getUserbyID, updateUserbyID, DeleteUserbyID, getAllProfile, searchUsers, getProfileUserbyID, DeleteProfileUserbyID
 }

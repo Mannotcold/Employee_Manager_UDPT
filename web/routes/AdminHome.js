@@ -25,6 +25,7 @@ router.get('/Register', getRegisterpage);
 router.get('/ViewProfile', ViewProfileUser);
 router.get('/search', getSearch);
 router.get('/ViewProfile/SearchUser/:id', getUpdateUser);
+
 router.post('/ViewProfile/DeleteUser/:id', postDeleteUser);
 router.post('/ViewProfile/UpdateProfile', postUpdateProfile);
 
