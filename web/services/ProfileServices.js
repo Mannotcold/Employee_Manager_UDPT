@@ -31,6 +31,7 @@ const getProfileUserbyID = async (Id) => {
     return results;
 }
 
+
 module.exports = {
     getAllProfile, getProfileUserbyID
 }
