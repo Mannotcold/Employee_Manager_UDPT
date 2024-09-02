@@ -30,6 +30,22 @@ const getProfileUserbyID = async (Id) => {
     return results;
 }
 
+const getProfileUserbyIDemployee = async (Id) => {
+    let results;
+    try {
+        const response = await axios.get(
+            `http://localhost:8760/api/profilesid/${Id}?`
+        );
+        results = response.data;
+
+        console.log(results);  // Sau đó log dữ liệu ra console
+    } catch (error) {
+        console.error('Error fetching data from API Java:', error);
+
+    }
+    return results;
+}
+
 // Hàm updateProfile để thực hiện cập nhật thông tin nhân viên trong cơ sở dữ liệu
 const updateProfile = async (id, employeeID, name, dob, gender, citizenID, taxCode, address, phone, email, bankAccount, pointReward) => {
     try {
@@ -94,5 +110,5 @@ async function searchUsers(keyword, category) {
 }
 
 module.exports = {
-    getAllProfile, getProfileUserbyID, updateProfile, searchUsers
+    getAllProfile, getProfileUserbyID, updateProfile, searchUsers, getProfileUserbyIDemployee
 }

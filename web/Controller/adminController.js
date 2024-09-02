@@ -102,7 +102,7 @@ const postUpdateProfile = async function (req, res, next) {
         let results = await updateProfile(ID, employeeID, name, dob, gender, citizenID, taxCode, address, phone, email, bankAccount, pointReward);
 
         // Trả về phản hồi JSON thay vì redirect
-        res.redirect(`/adminhome`)
+        res.redirect(`/adminhome/ViewProfile`)
     } catch (error) {
         console.error("Error updating profile:", error);
         next(error);

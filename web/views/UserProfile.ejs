@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Profile</title>
+    <link rel="stylesheet" href="/stylesheets/styleAuthurHome.css">
+</head>
+
+<body class="light-theme">
+
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="flex-wrapper">
+                    <ul class="desktop-nav">
+                        <li><a href="/AuthurHome" class="nav-link">Profile</a></li>
+                        <li><a href="/AuthurHome/PaperSearchAuthur" class="nav-link">Papers</a></li>
+                        <li><a href="/AuthurHome/CreatePaper" class="nav-link">Create Paper</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                    <li><a href="" class="nav-link">Hello <%= listProfile.name %></a></li>
+                    <a href="/" class="button1">
+                        <h1>Logout</h1>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="main-body">
+                <div class="row gutters-sm">
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-column align-items-center text-center">
+                                    <!-- Hiển thị ảnh nếu có, nếu không có thì hiển thị ảnh mặc định -->
+                                    <img src="<%= listProfile.image_path || 'default_image_path.jpg' %>" alt="Author"
+                                        class="rounded-circle" width="150">
+                                    <div class="mt-3">
+                                        <h4>
+                                            <%= listProfile.name %>
+                                        </h4>
+                                        <p class="text-secondary mb-1">
+                                            <%= listProfile.bio || 'No bio available' %>
+                                        </p>
+                                        <p class="text-muted font-size-sm">Interests: <%= listProfile.interests
+                                                || 'No interests listed' %>
+                                        </p>
+                                        <a class="btn btn-info"
+                                            href="/usersHome/profile/<%= listProfile.id %>">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h6 class="d-flex align-items-center mb-3"><i
+                                        class="material-icons text-info mr-2">assignment</i>Profile Details</h6>
+                                <ul class="list-group">
+                                    <% if (listProfile.employeeId) { %>
+                                        <li class="list-group-item">ID: <%= listProfile.id %>
+                                        </li>
+                                        <li class="list-group-item">Employee ID: <%= listProfile.employeeId %>
+                                        </li>
+                                        <% } %>
+                                            <% if (listProfile.dob) { %>
+                                                <li class="list-group-item">Date of Birth: <%= new
+                                                        Date(listProfile.dob).toLocaleDateString() %>
+                                                </li>
+                                                <% } %>
+                                                    <% if (listProfile.gender) { %>
+                                                        <li class="list-group-item">Gender: <%= listProfile.gender %>
+                                                        </li>
+                                                        <% } %>
+                                                            <% if (listProfile.citizenId) { %>
+                                                                <li class="list-group-item">Citizen ID: <%=
+                                                                        listProfile.citizenId %>
+                                                                </li>
+                                                                <% } %>
+                                                                    <% if (listProfile.taxCode) { %>
+                                                                        <li class="list-group-item">Tax Code: <%=
+                                                                                listProfile.taxCode %>
+                                                                        </li>
+                                                                        <% } %>
+                                                                            <% if (listProfile.address) { %>
+                                                                                <li class="list-group-item">Address: <%=
+                                                                                        listProfile.address %>
+                                                                                </li>
+                                                                                <% } %>
+                                                                                    <% if (listProfile.phone) { %>
+                                                                                        <li class="list-group-item">
+                                                                                            Phone: <%= listProfile.phone
+                                                                                                %>
+                                                                                        </li>
+                                                                                        <% } %>
+                                                                                            <% if (listProfile.email) {
+                                                                                                %>
+                                                                                                <li
+                                                                                                    class="list-group-item">
+                                                                                                    Email: <%=
+                                                                                                        listProfile.email
+                                                                                                        %>
+                                                                                                </li>
+                                                                                                <% } %>
+                                                                                                    <% if
+                                                                                                        (listProfile.bankAccount)
+                                                                                                        { %>
+                                                                                                        <li
+                                                                                                            class="list-group-item">
+                                                                                                            Bank
+                                                                                                            Account: <%=
+                                                                                                                listProfile.bankAccount
+                                                                                                                %>
+                                                                                                        </li>
+                                                                                                        <% } %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

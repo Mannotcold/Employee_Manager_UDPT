@@ -1,6 +1,7 @@
 const connection = require('../config/database');
 const {  } = require('../Middleware/verifyToken')
 const { ViewUserRequest, SendUserRequest } = require('../services/RequestServices')
+const { getProfileUserbyIDemployee, getProfileUserbyID, updateProfile } = require('../services/ProfileServices')
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = '123456';
 const bcrypt = require('bcrypt');
@@ -71,6 +72,56 @@ let handleLogin = async (req, res) => {
     }
 }
 
+
+// Profile service
+const getProfileUser = async function (req, res, next) {
+    
+    const Id = req.user.userId;
+    let User = await getProfileUserbyIDemployee(Id);
+    console.log(User);
+    res.render('UserProfile.ejs', { listProfile: User });
+}
+
+const getUpdateUser = async function (req, res, next) {
+
+    const Id = req.params.id;
+    // console.log(Id);
+    let User = await getProfileUserbyID(Id);
+    console.log(User);
+    res.render('UpdateProfileUser.ejs', { listProfile: User });
+}
+
+const postUpdateProfile = async function (req, res, next) {
+    try {
+        // Lấy ID từ URL
+        let ID = req.body.id;
+        // Lấy các thông tin từ request body
+        let employeeID = req.body.employee_id;
+        let name = req.body.name;
+        let dob = req.body.dob;
+        let gender = req.body.gender;
+        let citizenID = req.body.citizen_id;
+        let taxCode = req.body.tax_code;
+        let address = req.body.address;
+        let phone = req.body.phone;
+        let email = req.body.email;
+        let bankAccount = req.body.bank_account;
+        let pointReward = req.body.point_reward;
+
+        // Ghi log thông tin nhận được
+        console.log(">>>req.body: ", req.body);
+
+        // Thực hiện cập nhật thông tin nhân viên thông qua hàm updateProfile
+        let results = await updateProfile(ID, employeeID, name, dob, gender, citizenID, taxCode, address, phone, email, bankAccount, pointReward);
+
+        // Trả về phản hồi JSON thay vì redirect
+        res.redirect(`/userhome`)
+    } catch (error) {
+        console.error("Error updating profile:", error);
+        next(error);
+    }
+};
+
 // Request service*
 const HomeUser = async function (req, res, next) {
     try {
@@ -105,5 +156,5 @@ const PostUserRequest = async function (req, res, next) {
 
 
 module.exports = {
-    handleLogin, HomeUser, UserRequest, PostUserRequest
+    handleLogin, HomeUser, UserRequest, PostUserRequest, getProfileUser, getUpdateUser, postUpdateProfile
 }
