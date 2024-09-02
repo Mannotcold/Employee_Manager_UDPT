@@ -1,7 +1,7 @@
 const connection = require('../config/database');
-const { getAllProfile, getProfileUserbyID } = require('../services/ProfileServices')
+const { getAllProfile, getProfileUserbyID, updateProfile, searchUsers } = require('../services/ProfileServices')
 const { getRequest, updateRequest } = require('../services/RequestServices')
-const {  searchUsers, DeleteProfileUserbyID } = require('../services/LoginServives')
+const { DeleteProfileUserbyID } = require('../services/LoginServives')
 
 // Request service
 
@@ -69,52 +69,6 @@ const ViewProfileUser = async function (req, res, next) {
     }
 }
 
-const postUpdateProfile = async function (req, res, next) {
-    // Lấy các thông tin từ request body
-    let ID = req.body.id;
-    console.log("hfbfb", ID)
-    let employeeID = req.body.employee_id;
-    let name = req.body.name;
-    let dob = req.body.dob;
-    let gender = req.body.gender;
-    let citizenID = req.body.citizen_id;
-    let taxCode = req.body.tax_code;
-    let address = req.body.address;
-    let phone = req.body.phone;
-    let email = req.body.email;
-    let bankAccount = req.body.bank_account;
-    let pointReward = req.body.point_reward;
-
-    // Ghi log thông tin nhận được
-    console.log(">>>req.body: ", req.body);
-
-    // Thực hiện câu lệnh SQL để cập nhật thông tin nhân viên
-    const [results, fields] = await connection.query(`
-        UPDATE Employees 
-        SET 
-            name = ?, 
-            dob = ?, 
-            gender = ?, 
-            citizen_id = ?, 
-            tax_code = ?, 
-            address = ?, 
-            phone = ?, 
-            email = ?, 
-            bank_account = ?, 
-            point_reward = ? 
-        WHERE 
-            employee_id = ?`,
-        [name, dob, gender, citizenID, taxCode, address, phone, email, bankAccount, pointReward, employeeID]
-    );
-
-    // Ghi log kết quả của câu lệnh SQL
-    console.log(">>>results: ", results);
-
-    // Chuyển hướng về trang quản lý nhân viên hoặc trang khác phù hợp
-    return res.redirect('/adminhome/ViewProfile');
-}
-
-
 const getUpdateUser = async function (req, res, next) {
 
     const Id = req.params.id;
@@ -124,6 +78,40 @@ const getUpdateUser = async function (req, res, next) {
     res.render('UpdateProfileUser.ejs', { listProfile: User });
 }
 
+const postUpdateProfile = async function (req, res, next) {
+    try {
+        // Lấy ID từ URL
+        let ID = req.body.id;
+        // Lấy các thông tin từ request body
+        let employeeID = req.body.employee_id;
+        let name = req.body.name;
+        let dob = req.body.dob;
+        let gender = req.body.gender;
+        let citizenID = req.body.citizen_id;
+        let taxCode = req.body.tax_code;
+        let address = req.body.address;
+        let phone = req.body.phone;
+        let email = req.body.email;
+        let bankAccount = req.body.bank_account;
+        let pointReward = req.body.point_reward;
+
+        // Ghi log thông tin nhận được
+        console.log(">>>req.body: ", req.body);
+
+        // Thực hiện cập nhật thông tin nhân viên thông qua hàm updateProfile
+        let results = await updateProfile(ID, employeeID, name, dob, gender, citizenID, taxCode, address, phone, email, bankAccount, pointReward);
+
+        // Trả về phản hồi JSON thay vì redirect
+        res.redirect(`/adminhome`)
+    } catch (error) {
+        console.error("Error updating profile:", error);
+        next(error);
+    }
+};
+
+
+
+
 
 const postDeleteUser = async function (req, res, next) {
 
@@ -132,7 +120,6 @@ const postDeleteUser = async function (req, res, next) {
     let User = await DeleteProfileUserbyID(UserId);
     res.redirect(`/adminhome`)
 }
-
 
 const getSearch = async function (req, res, next) {
     try {

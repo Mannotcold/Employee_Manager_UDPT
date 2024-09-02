@@ -71,7 +71,7 @@ let handleLogin = async (req, res) => {
     }
 }
 
-// Request service
+// Request service*
 const HomeUser = async function (req, res, next) {
     try {
         res.render('UserSendRequest.ejs');

@@ -5,16 +5,6 @@ const { ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDelete
 const { verifyToken, verifyRole } = require('../Middleware/verifyToken');
 var router = express.Router();
 
-// router.get('/api/requests', async (req, res, next) => {
-//     try {
-//         const response = await axios.get('http://localhost:8080/api/requests');
-//         res.json(response.data);
-//         console.log(response.data);
-//     } catch (error) {
-//         console.error('Error fetching data from API Java:', error);
-//         res.status(500).json({ error: 'Failed to fetch data from API Java' });
-//     }
-// });
 
 
 // /* GET register page. */
@@ -24,10 +14,10 @@ router.get('/Register', getRegisterpage);
 //Trang quản lý profile
 router.get('/ViewProfile', ViewProfileUser);
 router.get('/search', getSearch);
-router.get('/ViewProfile/SearchUser/:id', getUpdateUser);
+router.get('/ViewProfile/SearchUser/:id', getUpdateUser);//lấy user cần update
+router.post('/ViewProfile/UpdateProfile', postUpdateProfile);//update user
 
 router.post('/ViewProfile/DeleteUser/:id', postDeleteUser);
-router.post('/ViewProfile/UpdateProfile', postUpdateProfile);
 
 //Trang quản lý request
 router.get('/request', verifyToken, verifyRole('admin'), ViewRequestUser);

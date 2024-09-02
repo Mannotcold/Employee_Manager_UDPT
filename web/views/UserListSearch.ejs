@@ -10,7 +10,10 @@
             <% listUser.forEach(function(User) { %>
                 <tr>
                     <td>
-                        <%= User.employee_id %>
+                        <%= User.id %>
+                    </td>
+                    <td>
+                        <%= User.employeeId %>
                     </td>
                     <td>
                         <%= User.name %>
@@ -22,10 +25,10 @@
                         <%= User.gender %>
                     </td>
                     <td>
-                        <%= User.citizen_id %>
+                        <%= User.citizenId %>
                     </td>
                     <td>
-                        <%= User.tax_code %>
+                        <%= User.taxCode %>
                     </td>
                     <td>
                         <%= User.address %>
@@ -37,13 +40,10 @@
                         <%= User.email %>
                     </td>
                     <td>
-                        <%= User.bank_account %>
+                        <%= User.bankAccount %>
                     </td>
                     <td>
-                        <%= User.point_reward %>
-                    </td>
-                    <td>
-                        <a href="" class="button1">
+                        <a href="/adminhome/ViewProfile/SearchUser/<%= user.id %>" class="button">
                             <button>Edit</button>
                         </a>
     

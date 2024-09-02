@@ -50,16 +50,16 @@ async function searchUsers(keyword, category) {
 }
 
 
-const getProfileUserbyID = async (Id) => {
-    let [results, fields] = await connection.query(`SELECT * FROM Employees WHERE employee_id = ?`, [Id]);
-    let User = results && results.length > 0 ? results[0] : {};
-    results.forEach(user => {
-        if (user.dob) {
-            user.dob = new Date(user.dob).toISOString().split('T')[0];
-        }
-    });
-    return results;
-}
+// const getProfileUserbyID = async (Id) => {
+//     let [results, fields] = await connection.query(`SELECT * FROM Employees WHERE employee_id = ?`, [Id]);
+//     let User = results && results.length > 0 ? results[0] : {};
+//     results.forEach(user => {
+//         if (user.dob) {
+//             user.dob = new Date(user.dob).toISOString().split('T')[0];
+//         }
+//     });
+//     return results;
+// }
 
 const DeleteProfileUserbyID = async (employeeId) => {
     try {
@@ -106,5 +106,5 @@ const DeleteUserbyID = async (userID) => {
 
 
 module.exports = {
-    getAllUsers, getUserbyID, updateUserbyID, DeleteUserbyID, getAllProfile, searchUsers, getProfileUserbyID, DeleteProfileUserbyID
+    getAllUsers, getUserbyID, updateUserbyID, DeleteUserbyID, getAllProfile, searchUsers, DeleteProfileUserbyID
 }
