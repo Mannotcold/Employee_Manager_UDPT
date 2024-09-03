@@ -1,5 +1,5 @@
 const connection = require('../config/database');
-const { getAllProfile, getProfileUserbyID, updateProfile, searchUsers } = require('../services/ProfileServices')
+const { getAllProfile, getProfileUserbyID, updateProfile, searchUsers, getProfileUserbyIDemployee } = require('../services/ProfileServices')
 const { getRequest, updateRequest } = require('../services/RequestServices')
 const { DeleteProfileUserbyID } = require('../services/LoginServives')
 
@@ -56,6 +56,16 @@ const postDisapproveRequest = async function (req, res, next) {
 
 
 // Profile service
+
+
+const getProfileUser = async function (req, res, next) {
+
+    const Id = req.user.userId;
+    let User = await getProfileUserbyIDemployee(Id);
+    // console.log(Id);
+    res.render('UserProfile.ejs', { listProfile: User });
+}
+
 
 const ViewProfileUser = async function (req, res, next) {
     // const userId = req.user.userId;
@@ -146,5 +156,5 @@ const getSearch = async function (req, res, next) {
 
 
 module.exports = {
-    ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser, ViewRequestUser, postApproveRequest, postDisapproveRequest
+    ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser, ViewRequestUser, postApproveRequest, postDisapproveRequest, getProfileUser
 }

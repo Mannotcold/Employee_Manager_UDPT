@@ -1,14 +1,15 @@
 var express = require('express');
 const axios = require('axios');
 const { getAdminpage, getRegisterpage, postRegisterpage, getedituserpage, postUpdatepage, postDeletepage } = require('../Controller/homeController')
-const { ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser, ViewRequestUser, postApproveRequest, postDisapproveRequest } = require('../Controller/adminController')
+const { ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser, ViewRequestUser, postApproveRequest, postDisapproveRequest, getProfileUser } = require('../Controller/adminController')
 const { verifyToken, verifyRole } = require('../Middleware/verifyToken');
 var router = express.Router();
 
 
 
 // /* GET register page. */
-router.get('/', verifyToken, verifyRole('admin'), getAdminpage);
+router.get('/', verifyToken, verifyRole('admin'), getProfileUser);
+router.get('/user', verifyToken, verifyRole('admin'), getAdminpage);
 router.get('/Register', getRegisterpage);
 
 //Trang quản lý profile
