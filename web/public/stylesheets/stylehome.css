@@ -1074,13 +1074,13 @@ footer p {
 
 .fl-table thead th {
   color: #ffffff;
-  background: #4FC3A1;
+  background: #564ce6;
 }
 
 
 .fl-table thead th:nth-child(odd) {
   color: #ffffff;
-  background: #324960;
+  background: #2e8da3;
 }
 
 .title {
@@ -1098,4 +1098,24 @@ td {
 
 tr:hover {
   background-color: #ccc;
+}
+
+/* Đổi màu cho các liên kết trong navigation */
+.navbar .nav-link {
+  color: #ecf0f1;
+  /* Màu chữ cho các liên kết */
+  text-decoration: none;
+}
+
+.navbar .nav-link:hover {
+  color: #3498db;
+  /* Màu chữ khi hover */
+}
+
+.navbar .nav-link1 {
+  color: #e74c3c;
+}
+
+.navbar .nav-link:hover {
+  color: #c0392b;
 }

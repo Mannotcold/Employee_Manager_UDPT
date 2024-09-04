@@ -315,7 +315,8 @@ h2 {
 }
 
 .card-body {
-    padding: 20px;
+    
+    padding: 10px 500px;
 }
 
 .card img.rounded-circle {
@@ -467,4 +468,24 @@ h2 {
 
 .list-group-item small {
     color: #6c757d;
+}
+
+/* Đổi màu cho các liên kết trong navigation */
+.navbar .nav-link {
+    color: #ecf0f1;
+    /* Màu chữ cho các liên kết */
+    text-decoration: none;
+}
+
+.navbar .nav-link:hover {
+    color: #3498db;
+    /* Màu chữ khi hover */
+}
+
+.navbar .nav-link1 {
+    color: #e74c3c;
+}
+
+.navbar .nav-link:hover {
+    color: #c0392b;
 }

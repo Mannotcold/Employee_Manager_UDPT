@@ -153,8 +153,19 @@ const PostUserRequest = async function (req, res, next) {
     res.redirect(`/usersHome/YourRequest`);  // Sau khi gửi yêu cầu, điều hướng đến trang "Your Request"
 }
 
-
+//time sheet
+const timesheetRequest = async function (req, res, next) {
+    const userId = req.user.userId;
+    try {
+        let results = await ViewUserRequest(userId);
+        // console.log("ten user", userId);
+        res.render('UserTimeSheet.ejs', { listUser: results });
+    } catch (error) {
+        console.error('Error retrieving papers:', error);
+        next(error);
+    }
+}
 
 module.exports = {
-    handleLogin, HomeUser, UserRequest, PostUserRequest, getProfileUser, getUpdateUser, postUpdateProfile
+    handleLogin, HomeUser, UserRequest, PostUserRequest, getProfileUser, getUpdateUser, postUpdateProfile, timesheetRequest
 }

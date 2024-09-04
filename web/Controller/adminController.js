@@ -3,6 +3,22 @@ const { getAllProfile, getProfileUserbyID, updateProfile, searchUsers, getProfil
 const { getRequest, updateRequest } = require('../services/RequestServices')
 const { DeleteProfileUserbyID } = require('../services/LoginServives')
 
+// timesheet 
+
+const ViewtimesheetUser = async function (req, res, next) {
+
+    // const userId = req.user.userId;
+    try {
+        let results = await getRequest();
+        // console.log("ten user", userId);
+        res.render('timesheet.ejs', { listUser: results });
+    } catch (error) {
+        console.error('Error retrieving papers:', error);
+        next(error);
+    }
+}
+
+
 // Request service
 
 const ViewRequestUser = async function (req, res, next) {
@@ -63,7 +79,7 @@ const getProfileUser = async function (req, res, next) {
     const Id = req.user.userId;
     let User = await getProfileUserbyIDemployee(Id);
     // console.log(Id);
-    res.render('UserProfile.ejs', { listProfile: User });
+    res.render('AdminProfile.ejs', { listProfile: User });
 }
 
 
@@ -156,5 +172,5 @@ const getSearch = async function (req, res, next) {
 
 
 module.exports = {
-    ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser, ViewRequestUser, postApproveRequest, postDisapproveRequest, getProfileUser
+    ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser, ViewRequestUser, postApproveRequest, postDisapproveRequest, getProfileUser, ViewtimesheetUser
 }

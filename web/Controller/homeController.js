@@ -15,9 +15,7 @@ const getLoginpage = function (req, res, next) {
 
 const getAdminpage = async function (req, res, next) {
     const userId = req.user.userId;
-    console.log("asafsfsafsa", userId);
     let results = await getAllUsers();
-    console.log(">>>req.body: ", results);
     res.render('admin.ejs', { listusers: results });
 
 }

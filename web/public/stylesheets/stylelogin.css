@@ -229,7 +229,9 @@ html {
 \*-----------------------------------*/
 
 
-
+.form-group.-none {
+    display: none; /* Ẩn hoàn toàn phần tử này */
+}
 header {
   background-color: var(--headerbackground-primary);
   padding: 10px 20px;
@@ -306,6 +308,11 @@ h2 {
   margin-bottom: 30px;
 }
 
+.form-group.-none {
+  display: none;
+  /* Ẩn hoàn toàn phần tử này */
+}
+
 .form-wrapper {
   display: flex;
   border: 1px solid #ccc;
@@ -373,4 +380,24 @@ p {
 
 .d-none {
   display: none;
+}
+
+/* Đổi màu cho các liên kết trong navigation */
+.navbar .nav-link {
+  color: #ecf0f1;
+  /* Màu chữ cho các liên kết */
+  text-decoration: none;
+}
+
+.navbar .nav-link:hover {
+  color: #3498db;
+  /* Màu chữ khi hover */
+}
+
+.navbar .nav-link1 {
+  color: #e74c3c;
+}
+
+.navbar .nav-link:hover {
+  color: #c0392b;
 }

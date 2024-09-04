@@ -1,7 +1,7 @@
 var express = require('express');
 const axios = require('axios');
 const { getAdminpage, getRegisterpage, postRegisterpage, getedituserpage, postUpdatepage, postDeletepage } = require('../Controller/homeController')
-const { ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser, ViewRequestUser, postApproveRequest, postDisapproveRequest, getProfileUser } = require('../Controller/adminController')
+const { ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser, ViewRequestUser, postApproveRequest, postDisapproveRequest, getProfileUser, ViewtimesheetUser } = require('../Controller/adminController')
 const { verifyToken, verifyRole } = require('../Middleware/verifyToken');
 var router = express.Router();
 
@@ -24,6 +24,11 @@ router.post('/ViewProfile/DeleteUser/:id', postDeleteUser);
 router.get('/request', verifyToken, verifyRole('admin'), ViewRequestUser);
 router.post('/request/Approve/:id', verifyToken, verifyRole('admin'), postApproveRequest);
 router.post('/request/Disapprove/:id', verifyToken, verifyRole('admin'), postDisapproveRequest);
+
+//Trang quản lý timesheet
+router.get('/timesheet', verifyToken, verifyRole('admin'), ViewtimesheetUser);
+
+
 
 
 router.post('/Register/Create_user', postRegisterpage);
