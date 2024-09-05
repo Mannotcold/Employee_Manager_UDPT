@@ -12,7 +12,7 @@
   /**
    * light theme colors 
    */
-  --headerbackground-primary: hsl(242, 87%, 56%);
+  --headerbackground-primary: #007bff;
   --background-primary: hsl(0, 0%, 100%);
   --background-secondary: hsl(0, 0%, 97%);
 
