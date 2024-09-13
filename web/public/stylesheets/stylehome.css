@@ -658,7 +658,7 @@ header {
 .flex-wrapper {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 110%;
   justify-content: space-between;
   gap: 30px;
   /* Space between items */

@@ -44,11 +44,27 @@ const ViewUserRequest = async (userId) => {
     return results;
 }
 
+const ViewUserApprovedRequest = async (userId) => {
+    let results;
+    try {
+        const response = await axios.get(
+            `http://localhost:8080/api/requestsandstatus/${userId}?`
+        );
+        results = response.data;
+
+        console.log(results);  // Sau đó log dữ liệu ra console
+    } catch (error) {
+        console.error('Error fetching data from API Java:', error);
+
+    }
+    return results;
+}
+
 const generateRequestId = (userId) => {
     const randomDigits = Math.floor(100 + Math.random() * 900); // Tạo số ngẫu nhiên có 3 chữ số
     return `REQ${userId}${randomDigits}`;
 };
-const SendUserRequest = async (userId, requestType, requestDate, status, notes) => {
+const SendUserRequest = async (userId, requestType, requestDate, request_end, status, notes) => {
     let results;
     const requestId = generateRequestId(userId);
     const requestData = {
@@ -57,7 +73,8 @@ const SendUserRequest = async (userId, requestType, requestDate, status, notes) 
         requestType: requestType,
         status: status,
         details: {
-            startDate: requestDate,  // Sử dụng requestDate từ form
+            startDate: requestDate,
+            endDate: request_end,  // Sử dụng requestDate từ form
             reason: notes || 'No additional notes'  // Ghi chú từ form, nếu không có sẽ là 'No additional notes'
         },
         createdAt: new Date().toISOString(),
@@ -79,6 +96,57 @@ const SendUserRequest = async (userId, requestType, requestDate, status, notes) 
 }
 
 
+const GetRequestByID = async (requestId) => {
+    let results;
+    try {
+        const response = await axios.get(
+            `http://localhost:8080/api/requestsbyrequestId/${requestId}?`
+        );
+        results = response.data;
+
+        console.log("dasdasdas", results);  // Sau đó log dữ liệu ra console
+    } catch (error) {
+        console.error('Error fetching data from API Java:', error);
+
+    }
+    return results;
+}
+
+const UpdateAllRequest = async (requestId, id, userId, requestType, requestDate, request_end, status, notes) => {
+    let results;
+    const requestData = {
+        requestId: requestId,
+        employeeId: userId,
+        requestType: requestType,
+        status: status,
+        details: {
+            startDate: requestDate,
+            endDate: request_end,
+            reason: notes || 'No additional notes'
+        },
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        approvedBy: null
+    };
+
+    console.log("Request Data:", requestData);
+    console.log("API Response:", `http://localhost:8080/api/requestsupdate/${id}`);
+    try {
+        const response = await axios.post(
+            `http://localhost:8080/api/requestsupdate/${id}`, // Đảm bảo rằng id không chứa dấu phẩy
+            requestData
+        );
+        results = response.data;
+        console.log("API Response:", `http://localhost:8080/api/requestsupdate/${id}`);
+        console.log("API Response:", results);
+    } catch (error) {
+        console.error('Error sending data to API Java:', error.message);
+    }
+    return results;
+};
+
+
+
 module.exports = {
-    getRequest, updateRequest, ViewUserRequest, SendUserRequest
+    getRequest, updateRequest, ViewUserRequest, SendUserRequest, ViewUserApprovedRequest, GetRequestByID, UpdateAllRequest
 }

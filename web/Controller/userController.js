@@ -1,11 +1,14 @@
 const connection = require('../config/database');
 const {  } = require('../Middleware/verifyToken')
-const { ViewUserRequest, SendUserRequest } = require('../services/RequestServices')
+const { ViewUserRequest, SendUserRequest, ViewUserApprovedRequest, GetRequestByID, UpdateAllRequest } = require('../services/RequestServices')
 const { getProfileUserbyIDemployee, getProfileUserbyID, updateProfile } = require('../services/ProfileServices')
+const { getAllActivities, SendUserActivity, ViewUserActivities } = require('../services/StravaServices')
+
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = '123456';
 const bcrypt = require('bcrypt');
-
+const axios = require('axios');
+require('dotenv').config();
 
 // Login service
 let handleLogin = async (req, res) => {
@@ -145,19 +148,24 @@ const UserRequest = async function (req, res, next) {
 }
 
 const PostUserRequest = async function (req, res, next) {
-    const { request_type, request_date, notes } = req.body;
+    const { request_type, request_date, request_end, notes } = req.body;
     let status = "Pending"
     const userId = req.user.userId;  // Lấy userId từ form
-
-    let User = await SendUserRequest(userId, request_type, request_date, status, notes);
-    res.redirect(`/usersHome/YourRequest`);  // Sau khi gửi yêu cầu, điều hướng đến trang "Your Request"
+    if (request_type === "Checkin" || request_type === "Checkout"){
+        let status = "Approved"
+        let User = await SendUserRequest(userId, request_type, request_date, request_end, status, notes);
+        res.redirect(`/usersHome/YourRequest`);  // Sau khi gửi yêu cầu, điều hướng đến trang "Your Request"
+    } else {
+        let User = await SendUserRequest(userId, request_type, request_date, request_end, status, notes);
+        res.redirect(`/usersHome/YourRequest`);}  // Sau khi gửi yêu cầu, điều hướng đến trang "Your Request"
+    
 }
 
 //time sheet
 const timesheetRequest = async function (req, res, next) {
     const userId = req.user.userId;
     try {
-        let results = await ViewUserRequest(userId);
+        let results = await ViewUserApprovedRequest(userId);
         // console.log("ten user", userId);
         res.render('UserTimeSheet.ejs', { listUser: results });
     } catch (error) {
@@ -166,6 +174,144 @@ const timesheetRequest = async function (req, res, next) {
     }
 }
 
+//update time sheet
+const updatetimesheetRequest = async function (req, res, next) {
+    const Id = req.params.id;
+    try {
+        let results = await GetRequestByID(Id);
+        // console.log("ten user", userId);
+        res.render('UserUpdateRequest.ejs', { listUser: results });
+    } catch (error) {
+        console.error('Error retrieving papers:', error);
+        next(error);
+    }
+}
+//update time sheet
+const PostTimesheetRequest = async function (req, res, next) {
+    const { requestId, id, request_type, request_date, request_end, notes } = req.body;
+    let status = "Pending";
+    const userId = req.user.userId;  // Lấy userId từ form
+    console.log(requestId, id, request_type, request_date, request_end, notes);
+    // Cập nhật trạng thái nếu là Checkin hoặc Checkout
+    if (request_type === "Checkin" || request_type === "Checkout") {
+        status = "Approved";
+    }
+
+    // Gọi hàm cập nhật yêu cầu
+    await UpdateAllRequest(requestId, id, userId, request_type, request_date, request_end, status, notes);
+
+    // Điều hướng đến trang "Your Request"
+    res.redirect('/usersHome/YourRequest');
+};
+
+
+const HomeActivityUser = async function (req, res, next) {
+    try {
+        res.render('UserSendActivity.ejs');
+    } catch (error) {
+        console.error('Error retrieving papers:', error);
+        next(error);
+    }
+}
+
+const UserActivity = async function (req, res, next) {
+    // const userId = req.user.userId;
+    try {
+        let results = await getAllActivities();
+    } catch (error) {
+        console.error('Error retrieving papers:', error);
+        next(error);
+    }
+}
+
+const PostUserActivity = async function (req, res, next) {
+    const { clientID, clientSecret, code } = req.body;
+    const grant_type = "authorization-code";
+    const userId = req.user.userId;  // Lấy userId từ form
+    console.log("dsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", clientID, clientSecret, code);
+    try {
+        // Gửi yêu cầu đăng hoạt động của người dùng
+        await SendUserActivity(userId, clientID, clientSecret, code);
+
+        // Sau khi gửi hoạt động, gọi hàm UserActivity để lấy danh sách hoạt động
+        let results = await getAllActivities();
+        res.redirect('/usersHome/YourActivity');
+    } catch (error) {
+        console.error('Error during posting or retrieving activities:', error);
+        next(error);
+    }
+};
+
+
+const ViewUserActivity = async function (req, res, next) {
+    const userId = req.user.userId;
+    try {
+        let results = await ViewUserActivities(userId);
+        // console.log("ten user", userId);
+        res.render('UserActivity.ejs', { listUser: results });
+    } catch (error) {
+        console.error('Error retrieving papers:', error);
+        next(error);
+    }
+}
+
+
+// API để hiển thị số điểm hiện tại của nhân viên và danh sách voucher
+const getEmployeePoints = async (req, res) => {
+    const employeeId = req.user.userId; 
+    
+    
+
+    try {
+         // Hardcode ID nhân viên để test
+        
+        const response = await axios.get(`${process.env.EMPLOYEE_SERVICE_URL}/employee/reward`, {
+            params: { employeeId: employeeId }
+        });
+        const points = response.data;  // Số điểm hiện tại của nhân viên
+
+        res.render('employeePage', { points: points, employeeId: employeeId, message: null });
+    } catch (error) {
+        console.error('Error occurred:', error.message);
+        res.render('employeePage', { points: null, employeeId: employeeId, message: 'Failed to retrieve points.' });
+    }
+};
+
+// API để đổi voucher
+const redeemVoucher = async (req, res) => {
+    try {
+        const employeeId = req.user.userId;  // Nhân viên thực hiện đổi voucher
+        const points = parseInt(req.body.points); // Điểm tương ứng với voucher
+        const response = await axios.post(`${process.env.EMPLOYEE_SERVICE_URL}/employee/redeemVoucher`, {
+            employeeId: employeeId,
+            points: points
+        });
+
+        // Sau khi đổi thành công, refresh lại trang để cập nhật điểm
+        res.redirect(`/usersHome/employee/reward?employeeId=${employeeId}`);
+    } catch (error) {
+        console.error('Error occurred:', error.message);
+        res.render('employeePage', { points: null, employeeId: req.body.employeeId, message: 'Failed to redeem voucher.' });
+    }
+};
+
+const getEmployeeHistory = async (req, res) => {
+    try {
+        // Assuming the employeeId will be passed as a query parameter or extracted from the authenticated user (if JWT was used)
+        const employeeId = req.user.userId ; // Hardcoded for testing
+
+        const response = await axios.get(`${process.env.EMPLOYEE_SERVICE_URL}/employee/history`, {
+            params: { employeeId: employeeId }
+        });
+
+        res.render('employeeHistoryPage', { transactions: response.data });
+    } catch (error) {
+        res.render('employeeHistoryPage', { message: 'Failed to retrieve transaction history.', transactions: [] });
+    }
+};
+
 module.exports = {
-    handleLogin, HomeUser, UserRequest, PostUserRequest, getProfileUser, getUpdateUser, postUpdateProfile, timesheetRequest
+    handleLogin, HomeUser, UserRequest, PostUserRequest, getProfileUser, getUpdateUser, postUpdateProfile, timesheetRequest, updatetimesheetRequest, 
+    PostTimesheetRequest, UserActivity, PostUserActivity, ViewUserActivity, HomeActivityUser,
+    getEmployeePoints, redeemVoucher, getEmployeeHistory
 }

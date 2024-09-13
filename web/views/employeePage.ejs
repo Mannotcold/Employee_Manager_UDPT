@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Reward</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Chào <%= employeeId %>, Bạn có <%= points %> điểm</h2>
+
+        <h3 class="mt-4">Danh sách Voucher</h3>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Voucher Name</th>
+                    <th>Points Required</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% const vouchers=[ { name: 'Voucher 1' , points: 50 }, { name: 'Voucher 2' , points: 100 }, {
+                    name: 'Voucher 3' , points: 150 }, { name: 'Voucher 4' , points: 200 }, { name: 'Voucher 5' ,
+                    points: 250 } ]; %>
+                    <% vouchers.forEach(voucher=> { %>
+                        <tr>
+                            <td>
+                                <%= voucher.name %>
+                            </td>
+                            <td>
+                                <%= voucher.points %>
+                            </td>
+                            <td>
+                                <form action="/usersHome/employee/redeemVoucher" method="POST">
+                                    <input type="hidden" name="employeeId" value="<%= employeeId %>">
+                                    <input type="hidden" name="points" value="<%= voucher.points %>">
+                                    <button type="submit" class="btn btn-primary" <%=points < voucher.points
+                                        ? 'disabled' : '' %>>
+                                        Đổi Voucher
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% }); %>
+            </tbody>
+        </table>
+
+        <% if (message) { %>
+            <div class="alert alert-info mt-3">
+                <%= message %>
+            </div>
+            <% } %>
+    </div>
+</body>
+
+</html>

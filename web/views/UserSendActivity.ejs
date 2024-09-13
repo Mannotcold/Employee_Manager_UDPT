@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Employee Request</title>
+  <title>Activity Request</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
     integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -24,7 +24,7 @@
           <ul class="desktop-nav">
             <li><a href="/usersHome" class="nav-link">Profile</a></li>
             <li>
-              <a href="/usersHome/Request" class="nav-link1">Request</a>
+              <a href="/usersHome/Request" class="nav-link">Request</a>
             </li>
             <li>
               <a href="/usersHome/YourRequest" class="nav-link">Your Request</a>
@@ -33,7 +33,7 @@
               <a href="/usersHome/Timesheet" class="nav-link">Time-sheet</a>
             </li>
             <li>
-              <a href="/usersHome/Activity" class="nav-link">Activity</a>
+              <a href="/usersHome/Activity" class="nav-link1">Activity</a>
             </li>
             <li>
               <a href="/usersHome/YourActivity" class="nav-link">Your Activity</a>
@@ -56,33 +56,28 @@
   <main>
     <div class="form-wrapper1">
       <div class="form-container">
-        <h2>Employee Request Form</h2>
-        <form action="/usersHome/SendRequest" method="post"> <!-- Form action cập nhật -->
-          <div class="form-group">
-            <label for="request_type">Request Type:</label>
-            <select id="request_type" name="request_type" required>
-              <option value="Leave">Leave</option>
-              <option value="WFH">Work From Home</option>
-              <option value="Checkin">Check in</option>
-              <option value="Checkout">Check out</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="request_date">Request Date:</label>
-            <input type="date" id="request_date" name="request_date" required>
+        <h2>Activity Request Form</h2>
+        <form action="/usersHome/SendActivity" method="post"> <!-- Form action cập nhật -->
 
-            <label for="request_date">Request End:</label>
-            <input type="date" id="request_date" name="request_end" required>
-          </div>
-          
           <div class="form-group">
-            <label for="notes">Notes:</label>
-            <textarea id="notes" name="notes" placeholder="Enter additional notes"></textarea>
+            <label for="clientID">Client ID:</label>
+            <input type="text" id="clientID" name="clientID" placeholder="Enter Client ID" required>
           </div>
-          <button type="submit" class="submit-btn">Submit Request</button>
+
+          <div class="form-group">
+            <label for="clientSecret">Client Secret:</label>
+            <input type="password" id="clientSecret" name="clientSecret" placeholder="Enter Client Secret" required>
+          </div>
+
+          <div class="form-group">
+            <label for="code">Code:</label>
+            <input type="text" id="code" name="code" placeholder="Enter Code" required>
+          </div>
+ 
+
+          <button type="submit" class="submit-btn">Submit Activity</button>
         </form>
-        <p><a class="link" href="/usersHome/YourRequest">View Existing Requests</a></p>
+        <p><a class="link" href="/usersHome/YourActivity">View Existing Activity</a></p>
       </div>
     </div>
   </main>

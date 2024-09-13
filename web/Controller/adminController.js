@@ -2,7 +2,9 @@ const connection = require('../config/database');
 const { getAllProfile, getProfileUserbyID, updateProfile, searchUsers, getProfileUserbyIDemployee } = require('../services/ProfileServices')
 const { getRequest, updateRequest } = require('../services/RequestServices')
 const { DeleteProfileUserbyID } = require('../services/LoginServives')
-
+const { getAllActivities } = require('../services/StravaServices')
+const axios = require('axios');
+require('dotenv').config();
 // timesheet 
 
 const ViewtimesheetUser = async function (req, res, next) {
@@ -170,7 +172,117 @@ const getSearch = async function (req, res, next) {
 }
 
 
+//của activiti
+const ViewAdminActivity = async function (req, res, next) {
+    // const userId = req.user.userId;
+    try {
+        let results = await getAllActivities();
+        // console.log("ten user", userId);
+        res.render('AdminActivity.ejs', { listUser: results });
+    } catch (error) {
+        console.error('Error retrieving papers:', error);
+        next(error);
+    }
+}
 
+
+
+
+
+
+
+//
+const givePoints = async (req, res) => {
+    try {
+        const adminId = req.user.userId;  // Set cứng adminId
+        const employeeId = req.body.employeeIds;  // Không cần split, vì chỉ có một employeeId
+        const points = req.body.points;
+
+        // Gửi request tới microservice để tặng điểm cho một nhân viên
+        await axios.post(`${process.env.ADMIN_SERVICE_URL}/admin/givePoints`, {
+            adminId: adminId,
+            employeeId: employeeId,  // Sử dụng employeeId thay vì employeeIds
+            points: points
+        });
+
+        // Phản hồi thành công
+        res.render('givePointsPage', { message: 'Points awarded successfully!' });
+    } catch (error) {
+        // Phản hồi lỗi
+        console.error("Error occurred:", error.response ? error.response.data : error.message);
+        res.render('givePointsPage', { message: 'Failed to award points.' });
+    }
+};
+
+
+
+// exports.monthlyReward = async (req, res) => {
+//     try {
+//         const response = await axios.post(`${process.env.ADMIN_SERVICE_URL}/admin/monthlyReward`, req.body);
+//         res.render('rewardPage', { message: 'Monthly points added successfully!' });
+//     } catch (error) {
+//         const errorMessage = error.response ? error.response.data : 'Failed to add monthly points.';
+//         res.render('rewardPage', { message: errorMessage });
+//     }
+// };
+
+
+const monthlyReward = async (req, res) => {
+    try {
+        const adminId = req.user.userId; // Set cứng adminId tạm thời
+        const employeeIds = req.body.employeeIds; // Lấy employeeIds từ form
+        const points = req.body.points; // Lấy points từ form
+
+        // Ghi log để kiểm tra
+        console.log("Employee IDs:", employeeIds);
+        console.log("Points:", points);
+
+        // Gửi request tới microservice để thực hiện logic thưởng điểm hàng tháng
+        await axios.post(`${process.env.ADMIN_SERVICE_URL}/admin/monthlyReward`, {
+            adminId: adminId,
+            employeeIds: employeeIds,
+            points: points
+        });
+
+        // Thông báo thành công
+        res.render('rewardPage', { message: 'Monthly points added successfully!' });
+    } catch (error) {
+        // Ghi log lỗi để dễ dàng debug
+        console.error("Error occurred:", error.response ? error.response.data : error.message);
+
+        // Phản hồi lỗi về giao diện
+        res.render('rewardPage', { message: 'Failed to add monthly points.' });
+    }
+};
+
+
+
+const getAdminHistory = async (req, res) => {
+    const userId = req.user.userId;
+    const response = await axios.get(`${process.env.ADMIN_SERVICE_URL}/admin/history`, {
+        params: { adminId: userId }
+    });
+    console.log("Employee IDs:", `${process.env.ADMIN_SERVICE_URL}/admin/history`, {
+        params: { adminId: userId }
+    });
+    try {
+        const response = await axios.get(`${process.env.ADMIN_SERVICE_URL}/admin/history`, {
+            params: { adminId: userId }
+        });
+        console.log("Employee IDs:", `${process.env.ADMIN_SERVICE_URL}/admin/history`, {
+            params: { adminId: userId }
+        });
+        if (response.data && response.data.length > 0) {
+            res.render('historyPage', { transactions: response.data });
+        } else {
+            res.render('historyPage', { transactions: [], message: 'No transactions found.' });
+        }
+    } catch (error) {
+        const errorMessage = error.response ? error.response.data : 'Failed to retrieve history.';
+        res.render('historyPage', { transactions: [], message: errorMessage });
+    }
+};
 module.exports = {
-    ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser, ViewRequestUser, postApproveRequest, postDisapproveRequest, getProfileUser, ViewtimesheetUser
+    ViewProfileUser, getSearch, getUpdateUser, postUpdateProfile, postDeleteUser, ViewRequestUser, postApproveRequest, postDisapproveRequest, getProfileUser, ViewtimesheetUser,
+    ViewAdminActivity, givePoints, monthlyReward, getAdminHistory
 }

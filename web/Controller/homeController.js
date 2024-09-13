@@ -1,6 +1,6 @@
 const connection = require('../config/database')
 const { getAllUsers, getUserbyID, updateUserbyID, DeleteUserbyID } = require('../services/LoginServives')
-
+const { AddProfile } = require('../services/ProfileServices')
 const db = require('../models/index')
 const bcrypt = require('bcrypt');
 // const { Account } = require('../models');
@@ -20,11 +20,7 @@ const getAdminpage = async function (req, res, next) {
 
 }
 
-const getedituserpage = async function (req, res, next) {
-    const userId = req.params.id
-    let user = await getUserbyID(userId);
-    res.render('edituser.ejs', { userEdit: user });
-}
+
 
 const postUpdatepage = async function (req, res, next) {
     let userID = req.body.userID;
@@ -104,14 +100,19 @@ const postRegisterpage = async function (req, res, next) {
             'INSERT INTO Accounts (username, password_hash, role) VALUES (?, ?, ?)',
             [username, passwordHash, role]
         );
-
-        // Trả về phản hồi thành công
-        res.status(201).json({ message: 'User registered successfully' });
+        res.redirect(`/adminhome/user`)
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'An error occurred while registering the user' });
     }
 };
+
+// // Profile service
+const getedituserpage = async function (req, res, next) {
+    const userId = req.params.id
+    await AddProfile(userId);
+    res.render('register.ejs');
+}
 
 let user = [];
 const getProductpage = (req, res) => {

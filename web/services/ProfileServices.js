@@ -78,6 +78,29 @@ const updateProfile = async (id, employeeID, name, dob, gender, citizenID, taxCo
 };
 
 
+const AddProfile = async (employeeID) => {
+    try {
+        console.log(">>>data: ", employeeID);
+        // Gửi yêu cầu POST để cập nhật thông tin nhân viên
+        const response = await axios.post(
+            `http://localhost:8760/api/profiles`, // Đường dẫn API
+            {
+                employeeId: employeeID,
+            }
+        );
+
+
+        // Log dữ liệu kết quả trả về từ API
+        console.log(">>>API response data: ", response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error updating profile:', error);
+        throw error;
+    }
+};
+
+
+
 async function searchUsers(keyword, category) {
 
     let results;
@@ -95,7 +118,7 @@ async function searchUsers(keyword, category) {
         } else {
             throw new Error('No search criteria provided');
         }
-        console.log("sdadsadsasa",url)
+        console.log("sdadsadsasa", url)
 
         // Gửi yêu cầu đến API Java
         const response = await axios.get(url);
@@ -110,5 +133,6 @@ async function searchUsers(keyword, category) {
 }
 
 module.exports = {
-    getAllProfile, getProfileUserbyID, updateProfile, searchUsers, getProfileUserbyIDemployee
+    getAllProfile, getProfileUserbyID, updateProfile, searchUsers,
+    getProfileUserbyIDemployee, AddProfile
 }

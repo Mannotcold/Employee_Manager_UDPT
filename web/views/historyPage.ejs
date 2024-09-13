@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch sử thưởng điểm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+   
+</head>
+
+<body>
+    
+    <div class="container">
+        <h2 class="text-center mt-5">Lịch sử thưởng điểm</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Manager ID</th>
+                    <th>Employee ID</th>
+                    <th>Points</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (transactions.length> 0) { %>
+                    <% transactions.forEach(function(transaction) { %>
+                        <tr>
+                            <td>
+                                <%= transaction.adminId %>
+                            </td>
+                            <td>
+                                <%= transaction.employeeId %>
+                            </td>
+                            <td>
+                                <%= transaction.points %>
+                            </td>
+                            <td>
+                                <%= new Date(transaction.date).toLocaleString() %>
+                            </td>
+                        </tr>
+                        <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="4">No transactions found.</td>
+                                </tr>
+                                <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

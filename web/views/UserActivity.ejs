@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee</title>
+
+    <!-- custom css link -->
+    <link rel="stylesheet" href="/stylesheets/styleadminhome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+        integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- google font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="light-theme">
+
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="flex-wrapper">
+                    <ul class="desktop-nav">
+                        <li><a href="/usersHome" class="nav-link">Profile</a></li>
+                        <li>
+                            <a href="/usersHome/Request" class="nav-link">Request</a>
+                        </li>
+                        <li>
+                            <a href="/usersHome/YourRequest" class="nav-link">Your Request</a>
+                        </li>
+                        <li>
+                            <a href="/usersHome/Timesheet" class="nav-link">Time-sheet</a>
+                        </li>
+                        <li>
+                            <a href="/usersHome/Activity" class="nav-link">Activity</a>
+                        </li>
+                        <li>
+                            <a href="/usersHome/YourActivity" class="nav-link1">Your Activity</a>
+                        </li>
+                        <li>
+                            <a href="/usersHome/employee/reward" class="nav-link">Reward</a>
+                        </li>
+                        <li>
+                            <a href="/usersHome/employee/history" class="nav-link">History Reward</a>
+                        </li>
+                    </ul>
+                    <a href="/" class="button1">
+                        <h1>Logout</h1>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div>
+            <div class="table-wrapper">
+                <div class="title">
+                    <h1>Activity User</h1>
+                </div>
+                <table class="fl-table">
+                    <thead>
+                        <tr>
+                            <th>Mã hoạt động</th>
+                            <th>Mã nhân viên</th>
+                            <th>Ngày bắt đầu</th>
+                            <th>Ngày kết thúc</th>
+                            <th>Thời gian chạy</th>
+                            <th>Tổng số km chạy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (listUser && listUser.length > 0) { %>
+                            <% for (let i = 0; i < listUser.length; i++) { %>
+                                <tr name="idActivities" data-id="<%= listUser[i].idActivities %>">
+                                    <td><%= listUser[i].idActivities %></td>
+                                    <td><%= listUser[i].employeeId %></td>
+                                    <td><%= listUser[i].startDate %></td>
+                                    <td><%= listUser[i].endDate %></td>
+                                    <td><%= listUser[i].totalTimeEvent %></td>
+                                    <td><%= listUser[i].totalDistanceEvent %></td>
+                                </tr>
+                            <% } %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="6">No activities found.</td>
+                            </tr>
+                        <% } %>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -48,12 +48,17 @@
                         <li>
                             <a href="/adminhome/timesheet" class="nav-link1">Timesheet</a>
                         </li>
-
                         <li>
-                            <a href="#Reward" class="nav-link">Reward</a>
+                            <a href="/adminhome/Activity" class="nav-link">Activity</a>
                         </li>
                         <li>
-                            <a href="#Strava" class="nav-link">Strava</a>
+                            <a href="/adminhome/admin/monthlyRewardForm" class="nav-link">Monthly Reward</a>
+                        </li>
+                        <li>
+                            <a href="/adminhome/admin/history" class="nav-link">History Reward</a>
+                        </li>
+                        <li></li>
+                        <a href="/adminhome/admin/givePointsForm" class="nav-link">Give Reward</a>
                         </li>
                     </ul>
                     <a href="/" class="button1">
@@ -100,7 +105,7 @@
                 <table class="fl-table">
                     <thead>
                         <tr>
-                            
+
                             <th>Employee ID</th>
                             <th>Request Type</th>
                             <th>Status</th>
@@ -111,7 +116,7 @@
                     <tbody>
                         <% for (let i=0; i < listUser.length; i++) { %>
                             <tr name="requestId" data-id="<%= listUser[i].requestId %>">
-                                
+
                                 <td>
                                     <%= listUser[i].employeeId %>
                                 </td>
@@ -126,7 +131,7 @@
                                         End Date: <%= listUser[i].details.endDate %><br>
                                             Reason: <%= listUser[i].details.reason %>
                                 </td>
-                                
+
                             </tr>
                             <% } %>
                     </tbody>

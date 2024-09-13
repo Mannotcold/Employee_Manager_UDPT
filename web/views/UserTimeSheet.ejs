@@ -29,31 +29,27 @@
             <nav class="navbar">
                 <div class="flex-wrapper">
                     <ul class="desktop-nav">
-                        <li><a href="/adminhome" class="nav-link">HOME</a></li>
+                        <li><a href="/usersHome" class="nav-link">Profile</a></li>
                         <li>
-                            <a href="/adminhome/user" class="nav-link">User</a>
-                        </li>
-
-                        <li>
-                            <a href="/adminhome/Register" class="nav-link">Create User</a>
-                        </li>
-
-                        <li>
-                            <a href="/adminhome/ViewProfile" class="nav-link">View Profile</a>
-                        </li>
-
-                        <li>
-                            <a href="/adminhome/request" class="nav-link">Request</a>
+                            <a href="/usersHome/Request" class="nav-link">Request</a>
                         </li>
                         <li>
-                            <a href="/adminhome/timesheet" class="nav-link1">Timesheet</a>
-                        </li>
-
-                        <li>
-                            <a href="#Reward" class="nav-link">Reward</a>
+                            <a href="/usersHome/YourRequest" class="nav-link">Your Request</a>
                         </li>
                         <li>
-                            <a href="#Strava" class="nav-link">Strava</a>
+                            <a href="/usersHome/Timesheet" class="nav-link1">Time-sheet</a>
+                        </li>
+                        <li></li>
+                            <a href="/usersHome/Activity" class="nav-link">Activity</a>
+                        </li>
+                        <li>
+                            <a href="/usersHome/YourActivity" class="nav-link">Your Activity</a>
+                        </li>
+                        <li>
+                            <a href="/usersHome/employee/reward" class="nav-link">Reward</a>
+                        </li>
+                        <li>
+                            <a href="/usersHome/employee/history" class="nav-link">History Reward</a>
                         </li>
                     </ul>
                     <a href="/" class="button1">
@@ -100,18 +96,18 @@
                 <table class="fl-table">
                     <thead>
                         <tr>
-                            
+
                             <th>Employee ID</th>
                             <th>Request Type</th>
                             <th>Status</th>
                             <th>Details</th>
-                            <!-- <th>Action</th> -->
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% for (let i=0; i < listUser.length; i++) { %>
                             <tr name="requestId" data-id="<%= listUser[i].requestId %>">
-                                
+
                                 <td>
                                     <%= listUser[i].employeeId %>
                                 </td>
@@ -126,9 +122,12 @@
                                         End Date: <%= listUser[i].details.endDate %><br>
                                             Reason: <%= listUser[i].details.reason %>
                                 </td>
-                                
+                                <td>
+                                    <a class="btn btn-info" href="/usersHome/UpdateTimesheet/<%= listUser[i].requestId %>">Update</a>
+                                </td>
                             </tr>
                             <% } %>
+
                     </tbody>
                 </table>
             </div>
